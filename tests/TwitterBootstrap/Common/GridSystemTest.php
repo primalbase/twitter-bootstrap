@@ -1,5 +1,5 @@
 <?php
-use Eyewill\Tag\TwitterBootstrap\Common\GridSystem;
+use Primalbase\TwitterBootstrap\TwitterBootstrap\Common\GridSystem;
 
 class GridSystemTest extends \PHPUnit_Framework_TestCase
 {

@@ -1,0 +1,7 @@
+!.gitignore
+.composer
+composer
+symfony
+primalbase
+phpunit
+autoload.php

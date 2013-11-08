@@ -1,5 +1,5 @@
 <?php
-use Eyewill\Tag\TwitterBootstrap as Tag;
+use Primalbase\TwitterBootstrap\TwitterBootstrap as Tag;
 
 class TwitterBootstrapTest extends \PHPUnit_Framework_TestCase
 {

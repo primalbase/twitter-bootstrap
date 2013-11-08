@@ -1,0 +1,25 @@
+{
+  "name": "primalbase/twitter-bootstrap",
+  "description": "HTML markup class with Twitter Bootstrap for PHP.",
+  "keywords": ["html", "tag", "php", "twitter bootstrap"],
+  "type": "library",
+  "license": "MIT",
+  "homepage": "https://github.com/primalbase/twitter-bootstrap",
+  "authors": [
+    {
+      "name": "primalbase",
+      "email": "kawai@primalbase.jp"
+    }
+  ],
+  "require": {
+    "primalbase/html-tag2": "dev-master"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "3.7.*"
+  },
+  "autoload": {
+    "psr-0": {
+      "Primalbase\\TwitterBootstrap": "src/"
+   }
+  }
+}

@@ -1,8 +1,8 @@
 <?php
-namespace Eyewill\Tag\TwitterBootstrap\Components;
+namespace Primalbase\TwitterBootstrap\Components;
 
-use Eyewill\Tag\AbstractConfigLoader;
-use Eyewill\Tag\TwitterBootstrap as Tag;
+use Primalbase\TwitterBootstrap\AbstractConfigLoader;
+use Primalbase\TwitterBootstrap\TwitterBootstrap as Tag;
 
 class Alerts extends AbstractConfigLoader {
 
@@ -13,7 +13,7 @@ class Alerts extends AbstractConfigLoader {
         'class' => 'alert-link',
       ),
       'factory' => array(
-        'Eyewill\Tag\TwitterBootstrap\Components\Alerts',
+        'Primalbase\TwitterBootstrap\Components\Alerts',
         'alertLinkFactory',
       )
     ),
@@ -29,11 +29,11 @@ class Alerts extends AbstractConfigLoader {
         'Dismissable' => 'alert-dismissable',
       ),
       'factory'  => array(
-        'Eyewill\Tag\TwitterBootstrap\Components\Alerts',
+        'Primalbase\TwitterBootstrap\Components\Alerts',
         'alertFactory',
       ),
       'callback' => array(
-        'Eyewill\Tag\TwitterBootstrap\Components\Alerts',
+        'Primalbase\TwitterBootstrap\Components\Alerts',
         'alertCallback',
       ),
     ),

@@ -1,5 +1,5 @@
 <?php
-use Eyewill\Tag\TwitterBootstrap\Common\Forms;
+use Primalbase\TwitterBootstrap\TwitterBootstrap\Common\Forms;
 
 class FormsTest extends \PHPUnit_Framework_TestCase
 {

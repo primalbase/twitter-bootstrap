@@ -1,15 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: hiroshi_kawai
- * Date: 13/10/28
- * Time: 16:01
- */
+namespace Primalbase\TwitterBootstrap\Components;
 
-namespace Eyewill\Tag\TwitterBootstrap\Components;
-
-use Eyewill\Tag\AbstractConfigLoader;
-use Eyewill\Tag\TwitterBootstrap as Tag;
+use Primalbase\TwitterBootstrap\AbstractConfigLoader;
+use Primalbase\TwitterBootstrap\TwitterBootstrap as Tag;
 
 class Navs extends AbstractConfigLoader {
 
@@ -23,7 +16,7 @@ class Navs extends AbstractConfigLoader {
         'Justfied' => 'nav-justified'
       ),
       'factory' => array(
-        'Eyewill\Tag\TwitterBootstrap\Components\Navs',
+        'Primalbase\TwitterBootstrap\Components\Navs',
         'tabsFactory',
       )
     ),

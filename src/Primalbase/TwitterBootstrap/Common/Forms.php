@@ -1,8 +1,8 @@
 <?php
-namespace Eyewill\Tag\TwitterBootstrap\Common;
+namespace Primalbase\TwitterBootstrap\Common;
 
-use Eyewill\Tag\AbstractConfigLoader;
-use Eyewill\Tag\TwitterBootstrap as Tag;
+use Primalbase\TwitterBootstrap\AbstractConfigLoader;
+use Primalbase\TwitterBootstrap\TwitterBootstrap as Tag;
 
 class Forms extends AbstractConfigLoader {
 
@@ -16,7 +16,7 @@ class Forms extends AbstractConfigLoader {
         'type' => 'hidden'
       ),
       'factory' => array(
-        'Eyewill\Tag\TwitterBootstrap\Common\Forms',
+        'Primalbase\TwitterBootstrap\Common\Forms',
         'inputHiddenFactory',
       ),
     ),
@@ -30,7 +30,7 @@ class Forms extends AbstractConfigLoader {
         'Required' => array('required'),
       ),
       'factory' => array(
-        'Eyewill\Tag\TwitterBootstrap\Common\Forms',
+        'Primalbase\TwitterBootstrap\Common\Forms',
         'inputDatetimeFactory',
       ),
     ),
@@ -49,7 +49,7 @@ class Forms extends AbstractConfigLoader {
         'Required' => array('required'),
       ),
       'factory' => array(
-        'Eyewill\Tag\TwitterBootstrap\Common\Forms',
+        'Primalbase\TwitterBootstrap\Common\Forms',
         'inputFactory',
       ),
     ),
@@ -59,7 +59,7 @@ class Forms extends AbstractConfigLoader {
         'class' => 'form-control',
       ),
       'factory' => array(
-        'Eyewill\Tag\TwitterBootstrap\Common\Forms',
+        'Primalbase\TwitterBootstrap\Common\Forms',
         'textareaFactory',
       ),
     ),
@@ -68,7 +68,7 @@ class Forms extends AbstractConfigLoader {
         'class' => 'form-group',
       ),
       'factory' => array(
-        'Eyewill\Tag\TwitterBootstrap\Common\Forms',
+        'Primalbase\TwitterBootstrap\Common\Forms',
         'formGroupFactory',
       ),
     ),

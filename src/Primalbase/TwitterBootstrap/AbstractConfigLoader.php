@@ -1,5 +1,5 @@
 <?php
-namespace Eyewill\Tag;
+namespace Primalbase\TwitterBootstrap;
 
 abstract class AbstractConfigLoader {
 

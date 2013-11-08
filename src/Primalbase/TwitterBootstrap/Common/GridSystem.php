@@ -1,7 +1,7 @@
 <?php
-namespace Eyewill\Tag\TwitterBootstrap\Common;
+namespace Primalbase\TwitterBootstrap\Common;
 
-use Eyewill\Tag\AbstractConfigLoader;
+use Primalbase\TwitterBootstrap\AbstractConfigLoader;
 
 class GridSystem extends AbstractConfigLoader {
 

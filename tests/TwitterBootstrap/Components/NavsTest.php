@@ -1,7 +1,7 @@
 <?php
-use Eyewill\Tag\TwitterBootstrap\Components\Navs;
+use Primalbase\TwitterBootstrap\TwitterBootstrap\Components\Navs;
 
-use Eyewill\Tag\TwitterBootstrap as Tag;
+use Primalbase\TwitterBootstrap\TwitterBootstrap as Tag;
 
 class NavsTest extends \PHPUnit_Framework_TestCase
 {

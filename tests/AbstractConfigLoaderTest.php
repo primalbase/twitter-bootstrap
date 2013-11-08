@@ -1,5 +1,5 @@
 <?php
-use Eyewill\Tag\AbstractConfigLoader;
+use Primalbase\TwitterBootstrap\AbstractConfigLoader;
 
 class ConfigLoader extends AbstractConfigLoader
 {

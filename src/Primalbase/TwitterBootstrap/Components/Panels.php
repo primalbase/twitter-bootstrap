@@ -1,8 +1,8 @@
 <?php
-namespace Eyewill\Tag\TwitterBootstrap\Components;
+namespace Primalbase\TwitterBootstrap\Components;
 
-use Eyewill\Tag\AbstractConfigLoader;
-use Eyewill\Tag\TwitterBootstrap as Tag;
+use Primalbase\TwitterBootstrap\AbstractConfigLoader;
+use Primalbase\TwitterBootstrap\TwitterBootstrap as Tag;
 
 class Panels extends AbstractConfigLoader {
 

@@ -1,5 +1,5 @@
 <?php
-use Eyewill\Tag\TwitterBootstrap\Components\Navbar;
+use Primalbase\TwitterBootstrap\TwitterBootstrap\Components\Navbar;
 
 class NavbarTest extends \PHPUnit_Framework_TestCase
 {

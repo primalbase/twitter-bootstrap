@@ -1,8 +1,8 @@
 <?php
-namespace Eyewill\Tag\TwitterBootstrap\Components;
+namespace Primalbase\TwitterBootstrap\Components;
 
-use Eyewill\Tag\AbstractConfigLoader;
-use Eyewill\Tag\TwitterBootstrap as Tag;
+use Primalbase\TwitterBootstrap\AbstractConfigLoader;
+use Primalbase\TwitterBootstrap\TwitterBootstrap as Tag;
 
 class Navbar extends AbstractConfigLoader {
 
@@ -11,7 +11,7 @@ class Navbar extends AbstractConfigLoader {
     'navbarToggle' => array(
       'tagName'  => 'button',
       'callback' => array(
-        'Eyewill\Tag\TwitterBootstrap\Components\Navbar',
+        'Primalbase\TwitterBootstrap\Components\Navbar',
         'navbarToggleCallback',
       ),
       'attributes' => array(
