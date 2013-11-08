@@ -9,7 +9,7 @@ use Primalbase\TwitterBootstrap as TB;
 
 `<div class="container"></div>`
 
-### echo inputRequired('user'); ###
+### echo TB::inputRequired('user'); ###
 
 `<input type="text" name="user" required>`
 
