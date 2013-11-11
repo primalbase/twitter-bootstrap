@@ -1,5 +1,5 @@
 <?php
-use Primalbase\TwitterBootstrap\TwitterBootstrap\Common\GridSystem;
+use Primalbase\TwitterBootstrap\TwitterBootstrap\CSS\GridSystem;
 
 class GridSystemTest extends \PHPUnit_Framework_TestCase
 {

@@ -1,8 +1,10 @@
 <?php
 namespace Primalbase\TwitterBootstrap;
 
-abstract class AbstractConfigLoader {
+use Primalbase\Tag\Tag;
 
+abstract class AbstractTagFactory extends Tag
+{
   // protected static $configurations = array();
 
   public static function getFormatConfigurations()

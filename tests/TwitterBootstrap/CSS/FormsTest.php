@@ -1,5 +1,5 @@
 <?php
-use Primalbase\TwitterBootstrap\TwitterBootstrap\Common\Forms;
+use Primalbase\TwitterBootstrap\CSS\Forms;
 
 class FormsTest extends \PHPUnit_Framework_TestCase
 {

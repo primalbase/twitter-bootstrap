@@ -1,19 +1,16 @@
 <?php
 namespace Primalbase\TwitterBootstrap\Components;
 
-use Primalbase\TwitterBootstrap\AbstractConfigLoader;
 use Primalbase\TwitterBootstrap\TwitterBootstrap as Tag;
+use Primalbase\TwitterBootstrap\AbstractTagFactory;
 
-class Navbar extends AbstractConfigLoader {
+class Navbar extends AbstractTagFactory {
 
   protected static $configurations = array(
     'navbarHeader' => 'navbar-header',
     'navbarToggle' => array(
-      'tagName'  => 'button',
-      'callback' => array(
-        'Primalbase\TwitterBootstrap\Components\Navbar',
-        'navbarToggleCallback',
-      ),
+      'tagName'    => 'button',
+      'callback'   => 'navbarToggleCallback',
       'attributes' => array(
         'class'       => 'navbar-toggle',
         'data-toggle' => 'collapse',
@@ -61,9 +58,9 @@ class Navbar extends AbstractConfigLoader {
     )
   );
 
-  public static function navbarToggleCallback(Tag $tag)
+  public function navbarToggleCallback()
   {
-    $tag->append(Tag::span('Toggle navigation')->class('sr-only'))
+    $this->append(Tag::span('Toggle navigation')->class('sr-only'))
       ->append(Tag::span()->class('icon-bar'))
       ->append(Tag::span()->class('icon-bar'))
       ->append(Tag::span()->class('icon-bar'));

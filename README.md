@@ -4,18 +4,32 @@ twitter-bootstrap
 HTML markup class with Twitter Bootstrap for PHP.
 
 <pre>
-use Primalbase\TwitterBootstrap as TB;
-TB::$codeFormat = false;
+use Primalbase\TwitterBootstrap as Tag;
+\Primalbase\Tag\Tag::$codeFormat = false;
 </pre>
 
-### echo TB::container(); ###
+### echo Tag::html('ja') ###
+
+`<html lang="ja"></html>`
+
+### echo Tag::container() ###
 
 `<div class="container"></div>`
 
-### echo TB::inputRequired('user'); ###
+### echo Tag::row() ###
 
-`<input type="text" name="user" required>`
+`<div class="row"></div>`
 
-### echo TB::textArea('record[body]', "body contents", null, array('cols' => 3, 'rows' => 9))); ###
+### echo Tag::col(4) or echo Tag::colXs(4) ###
 
-`<textarea class="form-control" name="record[body]" cols="3" rows="9">body contents</textarea>`
+`<div class="col-xs-4"></div>`
+
+### echo Tag::row(Tag::colMd(10, 'text body')->mdOffset(2)) ###
+
+`<div class="row"><div class="col-md-10 col-md-offset-2">text body</div></div>`
+
+### echo Tag::inputRequired('user') ###
+
+`<input type="text" class="form-control" name="user" required>`
+
+### and other implementation now. ###

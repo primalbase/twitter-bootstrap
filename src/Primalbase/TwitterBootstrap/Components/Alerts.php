@@ -1,10 +1,10 @@
 <?php
 namespace Primalbase\TwitterBootstrap\Components;
 
-use Primalbase\TwitterBootstrap\AbstractConfigLoader;
 use Primalbase\TwitterBootstrap\TwitterBootstrap as Tag;
+use Primalbase\TwitterBootstrap\AbstractTagFactory;
 
-class Alerts extends AbstractConfigLoader {
+class Alerts extends AbstractTagFactory {
 
   protected static $configurations = array(
     'alertLink' => array(

@@ -1,10 +1,10 @@
 <?php
-namespace Primalbase\TwitterBootstrap\Common;
+namespace Primalbase\TwitterBootstrap\CSS;
 
-use Primalbase\TwitterBootstrap\AbstractConfigLoader;
 use Primalbase\TwitterBootstrap\TwitterBootstrap as Tag;
+use Primalbase\TwitterBootstrap\AbstractTagFactory;
 
-class Forms extends AbstractConfigLoader {
+class Forms extends AbstractTagFactory {
 
   // 'aaa'    => 'aaa'     -> Tag::aaa()    -> <div class="aaa"></div>
   // 'aaaBbb' => 'aaa-bbb' -> Tag::aaaBbb() -> <div class="aaa-bbb"></div>
@@ -16,7 +16,7 @@ class Forms extends AbstractConfigLoader {
         'type' => 'hidden'
       ),
       'factory' => array(
-        'Primalbase\TwitterBootstrap\Common\Forms',
+        'Primalbase\TwitterBootstrap\CSS\Forms',
         'inputHiddenFactory',
       ),
     ),
@@ -30,7 +30,7 @@ class Forms extends AbstractConfigLoader {
         'Required' => array('required'),
       ),
       'factory' => array(
-        'Primalbase\TwitterBootstrap\Common\Forms',
+        'Primalbase\TwitterBootstrap\CSS\Forms',
         'inputDatetimeFactory',
       ),
     ),
@@ -49,7 +49,7 @@ class Forms extends AbstractConfigLoader {
         'Required' => array('required'),
       ),
       'factory' => array(
-        'Primalbase\TwitterBootstrap\Common\Forms',
+        'Primalbase\TwitterBootstrap\CSS\Forms',
         'inputFactory',
       ),
     ),
@@ -59,7 +59,7 @@ class Forms extends AbstractConfigLoader {
         'class' => 'form-control',
       ),
       'factory' => array(
-        'Primalbase\TwitterBootstrap\Common\Forms',
+        'Primalbase\TwitterBootstrap\CSS\Forms',
         'textareaFactory',
       ),
     ),
@@ -68,7 +68,7 @@ class Forms extends AbstractConfigLoader {
         'class' => 'form-group',
       ),
       'factory' => array(
-        'Primalbase\TwitterBootstrap\Common\Forms',
+        'Primalbase\TwitterBootstrap\CSS\Forms',
         'formGroupFactory',
       ),
     ),

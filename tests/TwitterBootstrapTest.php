@@ -5,7 +5,7 @@ class TwitterBootstrapTest extends \PHPUnit_Framework_TestCase
 {
   protected function setUp()
   {
-    Tag::$codeFormat = false;
+    Primalbase\Tag\Tag::$codeFormat = false;
   }
   protected function tearDown()
   {
@@ -17,30 +17,99 @@ class TwitterBootstrapTest extends \PHPUnit_Framework_TestCase
 
   }
 
+  public function testReadMeExamples()
+  {
+    $this->assertEquals(
+      '<html lang="ja"></html>',
+      (string)Tag::html('ja')
+    );
+
+    $this->assertEquals(
+      '<div class="container"></div>',
+      (string)Tag::container()
+    );
+
+    $this->assertEquals(
+      '<div class="row"></div>',
+      (string)Tag::row()
+    );
+
+    $this->assertEquals(
+      '<div class="col-xs-4"></div>',
+      (string)Tag::col(4)
+    );
+
+    $this->assertEquals(
+      '<div class="col-xs-4"></div>',
+      (string)Tag::colXs(4)
+    );
+
+    $this->assertEquals(
+      '<div class="row"><div class="col-md-10 col-md-offset-2">text body</div></div>',
+      (string)Tag::row(Tag::colMd(10, 'text body')->mdOffset(2))
+    );
+
+    $this->assertEquals(
+      '<input type="text" class="form-control" name="user" required>',
+      (string)Tag::inputRequired('user')
+    );
+  }
+
   public function testCSS()
   {
-    // Overview
-    // Not completed yet.
+    $this->assertEquals('<!DOCTYPE html>', (string)Tag::getDocType());
+    $this->assertEquals('<html lang="en"></html>', (string)Tag::html());
+    $this->assertEquals('<html lang="ja" hoge="fuga"></html>', (string)Tag::html('ja', array('hoge' => 'fuga')));
+    $this->assertEquals('<meta name="viewport" content="width=device-width, initial-scale=1.0">',
+      (string)Tag::viewport());
+    $this->assertEquals('<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=1.0, maximum-scale=1.5">',
+      (string)Tag::viewport(true, '1.0', '1.5'));
+    $this->assertEquals('<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">',
+      (string)Tag::viewport(false));
+    $this->assertEquals('<img src="#" class="img-responsive">',
+      (string)Tag::imgResponsive());
+    $this->assertEquals('<img src="http://hoge.com/fuga.jpg" class="img-responsive" alt="Nice image." data-img="big-fuga.jpg">',
+      (string)Tag::imgResponsive('http://hoge.com/fuga.jpg', 'Nice image.', array('data-img' => 'big-fuga.jpg')));
     $this->assertEquals('<div class="container"></div>', (string)Tag::container());
+    $this->assertEquals('<div class="container" fuga>hoge</div>', (string)Tag::container('hoge', array('fuga')));
 
-    // Grid system
+  }
+
+  public function testCSSGridSystem()
+  {
     $this->assertEquals('<div class="row"></div>', (string)Tag::row());
-    $this->assertEquals('<div class="col-xs-1"></div>', (string)Tag::colXs1());
-    $this->assertEquals('<div class="col-sm-1"></div>', (string)Tag::colSm1());
-    $this->assertEquals('<div class="col-md-1"></div>', (string)Tag::colMd1());
-    $this->assertEquals('<div class="col-lg-1"></div>', (string)Tag::colLg1());
-    $this->assertEquals('<div class="col-xs-1 col-xs-offset-1"></div>', (string)Tag::colXs1XsOffset1());
-    $this->assertEquals('<div class="col-sm-1 col-sm-offset-1"></div>', (string)Tag::colSm1SmOffset1());
-    $this->assertEquals('<div class="col-md-1 col-md-offset-1"></div>', (string)Tag::colMd1MdOffset1());
-    $this->assertEquals('<div class="col-lg-1 col-lg-offset-1"></div>', (string)Tag::colLg1LgOffset1());
-    $this->assertEquals('<div class="col-xs-1 col-sm-2 col-md-3 col-lg-4"></div>', (string)Tag::colXs1Sm2Md3Lg4());
+    $this->assertEquals('<div class="col-xs-1"></div>', (string)Tag::colXs(1));
+    $this->assertEquals('<div class="col-sm-1"></div>', (string)Tag::colSm(1));
+    $this->assertEquals('<div class="col-md-1"></div>', (string)Tag::colMd(1));
+    $this->assertEquals('<div class="col-lg-1"></div>', (string)Tag::colLg(1));
+
+    $this->assertEquals('<div class="col-xs-12 col-xs-pull-0"></div>', (string)Tag::col(12)->pull(0));
+    $this->assertEquals('<div class="col-xs-12 col-xs-push-0"></div>', (string)Tag::col(12)->push(0));
+    $this->assertEquals('<div class="col-xs-12 col-xs-offset-0"></div>', (string)Tag::col(12)->offset(0));
+
+    $this->assertEquals('<div class="col-sm-1 col-sm-pull-1"></div>', (string)Tag::colSm(1)->smPull(1));
+    $this->assertEquals('<div class="col-sm-1 col-sm-push-1"></div>', (string)Tag::colSm(1)->smPush(1));
+    $this->assertEquals('<div class="col-sm-1 col-sm-offset-1"></div>', (string)Tag::colSm(1)->smOffset(1));
+
+    $this->assertEquals('<div class="col-xs-1 col-sm-2 col-md-3 col-lg-4"></div>',
+      (string)Tag::colXs(1)->sm(2)->md(3)->lg(4));
     $this->assertEquals(
       '<div class="col-xs-1 col-sm-2 col-md-3 col-lg-4 col-xs-offset-1 col-sm-offset-2 col-md-offset-3 col-lg-offset-4"></div>',
-      (string)Tag::colXs1Sm2Md3Lg4XsOffset1SmOffset2MdOffset3LgOffset4());
+      (string)Tag::colXs(1)->sm(2)->md(3)->lg(4)->xsOffset(1)->smOffset(2)->mdOffset(3)->lgOffset(4));
+  }
 
-    // Typography
-    // Not completed yet.
+  /**
+   * @todo Not completed yet.
+   */
+  public function testCSSTypography()
+  {
+    $this->assertEquals('<p class="lead"></p>', (string)Tag::lead());
+    $this->assertEquals('<p class="lead">lead text</p>', (string)Tag::lead('lead text'));
 
+  }
+
+  public function testCSSOther()
+  {
     // Code
     // Not completed yet.
 
@@ -123,7 +192,10 @@ class TwitterBootstrapTest extends \PHPUnit_Framework_TestCase
 
     // Navbar
     $this->assertEquals('<div class="navbar-header"></div>', (string)Tag::navbarHeader());
-    $this->assertEquals('<button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>', (string)Tag::navbarToggle());
+    $this->assertEquals(
+      '<button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>',
+      (string)Tag::navbarToggle()
+    );
     $this->assertEquals('<ul class="nav navbar-nav"></ul>', (string)Tag::navbarNav());
     $this->assertEquals('<ul class="nav navbar-nav navbar-left"></ul>', (string)Tag::navbarNavLeft());
     $this->assertEquals('<ul class="nav navbar-nav navbar-right"></ul>', (string)Tag::navbarNavRight());

@@ -1,10 +1,10 @@
 <?php
 namespace Primalbase\TwitterBootstrap\Components;
 
-use Primalbase\TwitterBootstrap\AbstractConfigLoader;
 use Primalbase\TwitterBootstrap\TwitterBootstrap as Tag;
+use Primalbase\TwitterBootstrap\AbstractTagFactory;
 
-class Panels extends AbstractConfigLoader {
+class Panels extends AbstractTagFactory {
 
   protected static $configurations = array(
     'panelBody'    => 'panel-body',
