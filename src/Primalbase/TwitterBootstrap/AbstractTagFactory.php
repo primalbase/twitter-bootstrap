@@ -57,4 +57,5 @@ abstract class AbstractTagFactory extends Tag
 
     return $config;
   }
+
 }

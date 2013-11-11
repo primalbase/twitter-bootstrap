@@ -1,7 +1,6 @@
 <?php
 namespace Primalbase\TwitterBootstrap;
 
-use Primalbase\TwitterBootstrap\TwitterBootstrap as Tag;
 use Primalbase\TwitterBootstrap\AbstractTagFactory;
 
 class CSS extends AbstractTagFactory {
@@ -47,7 +46,7 @@ class CSS extends AbstractTagFactory {
    *
    * @param array $config
    * @param array $args (0 => lang, 1 => options)
-   * @return \Primalbase\Tag\Tag
+   * @return \Primalbase\TwitterBootstrap\CSS
    */
   public static function htmlFactory(array $config, array $args)
   {
@@ -60,7 +59,7 @@ class CSS extends AbstractTagFactory {
     if (isset($args[1]) && is_array($args[1]))
       $attributes = array_merge($attributes, $args[1]);
 
-    $tag = Tag::create($tagName, $attributes);
+    $tag = static::create($tagName, $attributes);
     foreach (array_slice($args, 2) as $arg)
       $tag->append($arg);
 
@@ -72,7 +71,7 @@ class CSS extends AbstractTagFactory {
    *
    * @param array $config
    * @param array $args (0 => $user_scalable, 1 => $minimum_scale, 2 => $maximum_scale, 3 => options)
-   * @return \Primalbase\Tag\Tag
+   * @return \Primalbase\TwitterBootstrap\CSS
    */
   public static function viewportFactory(array $config, array $args)
   {
@@ -89,7 +88,7 @@ class CSS extends AbstractTagFactory {
 
     $attributes['content'] = implode(', ', $contents);
 
-    $tag = Tag::create($tagName, $attributes);
+    $tag = static::create($tagName, $attributes);
     foreach (array_slice($args, 3) as $arg)
       $tag->append($arg);
 
@@ -101,7 +100,7 @@ class CSS extends AbstractTagFactory {
    *
    * @param array $config
    * @param array $args (0 => src, 1 => alt, 2 => options,...)
-   * @return \Primalbase\Tag\Tag
+   * @return \Primalbase\TwitterBootstrap\CSS
    */
   public static function imgResponsiveFactory(array $config, array $args)
   {
@@ -114,7 +113,7 @@ class CSS extends AbstractTagFactory {
     if (isset($args[1]))
       $attributes['alt'] = $args[1];
 
-    $tag = Tag::create($tagName, $attributes);
+    $tag = static::create($tagName, $attributes);
     foreach (array_slice($args, 2) as $arg)
       $tag->append($arg);
 

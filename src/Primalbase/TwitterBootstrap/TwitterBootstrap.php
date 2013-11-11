@@ -22,6 +22,7 @@
 
 namespace Primalbase\TwitterBootstrap;
 
+use Primalbase\Tag\Tag;
 use Primalbase\TwitterBootstrap\CSS;
 use Primalbase\TwitterBootstrap\CSS\GridSystem;
 use Primalbase\TwitterBootstrap\CSS\Typography;
@@ -48,13 +49,17 @@ use Primalbase\TwitterBootstrap\CSS\Typography;
  *
  * CSS/Typography
  *
- * @todo CSS/Typography isn't implemented yet.
- * @todo CSS/Typography isn't tested yet.
- *
  * @method static typography lead(\mixed $options = null)
- * @method static Typography abbr(\string $title)
- * @method static Typography abbrInitialism(\string $title)
- * @method static Typography dlHorizontal()
+ * @method static typography textLeft(\mixed $options = null)
+ * @method static typography textCenter(\mixed $options = null)
+ * @method static typography textRight(\mixed $options = null)
+ * @method static Typography abbr(\string $title = null, $options = null)
+ * @method static Typography abbrInitialism(\string $title = null, $options = null)
+ * @method static Typography ulUnstyled($options = null)
+ * @method static Typography olUnstyled($options = null)
+ * @method static Typography ulInline($options = null)
+ * @method static Typography olInline($options = null)
+ * @method static Typography dlHorizontal($options = null)
  *
  * CSS/Code
  *
@@ -72,6 +77,7 @@ use Primalbase\TwitterBootstrap\CSS\Typography;
  *
  * @method static TwitterBootstrap formControl()
  * @method static TwitterBootstrap formGroup(\mixed $options)
+ * @method static TwitterBootstrap form(\mixed $options)
  *
  * CSS/Forms/Inline form
  *
@@ -131,7 +137,7 @@ use Primalbase\TwitterBootstrap\CSS\Typography;
  * @todo Css/Forms/Supported controls/Textarea isn't tested yet.
  * @todo Css/Forms/Supported controls/Textarea isn't implemented yet.
  *
- * @method static TwitterBootstrap textarea(\integer $rows, array $options)
+ * @method static TwitterBootstrap textarea(\string $name, \string $value, \string $placeholder, array $options) CSS\Forms
  *
  * Css/Forms/Supported controls/Checkboxes and radios
  *
@@ -183,20 +189,13 @@ use Primalbase\TwitterBootstrap\CSS\Typography;
  *
  * @todo Not implemented.
  *
- * CSS\
- *
- * @method static TwitterBootstrap textarea(\string $name, \string $value, \string $placeholder, array $options) CSS\Forms
- * @method static TwitterBootstrap formGroup(\mixed $options) CSS\Forms
- * @method static TwitterBootstrap form(\mixed $options) CSS\Forms
- * @method static TwitterBootstrap formInline(\mixed $options) CSS\Forms
- * @method static TwitterBootstrap formHorizontal(\mixed $options) CSS\Forms
  *
  * @method static TwitterBootstrap navbar(\mixed $options)
  * @method static TwitterBootstrap navbarInverse(\mixed $options)
  * @method static TwitterBootstrap navbarFixedTop(\mixed $options)
  * @method static TwitterBootstrap navbarInverseFixedTop(\mixed $options)
  */
-class TwitterBootstrap
+class TwitterBootstrap extends Tag
 {
   protected static $library = array(
     'Primalbase\TwitterBootstrap\CSS',
@@ -308,7 +307,43 @@ class TwitterBootstrap
       return call_user_func_array(array(get_called_class(), 'gridSpan'), $args);
     }
 
-    return call_user_func_array(array('\Primalbase\Tag\Tag', $tagName), $args);
+    return call_user_func_array(array(parent, $tagName), $args);
   }
 
+  /**
+   * @method Typography lead()
+   * @method Typography textLeft()
+   * @method Typography textCenter()
+   * @method Typography textRight()
+   * @method Typography textMuted()
+   * @method Typography textPrimary()
+   * @method Typography textSuccess()
+   * @method Typography textInfo()
+   * @method Typography textWarning()
+   * @method Typography textDanger()
+   *
+   * @param string $name
+   * @param array $args
+   * @return Tag
+   */
+  public function __call($name, $args)
+  {
+    $pattern = array(
+      'lead'        => 'lead',
+      'textLeft'    => 'text-left',
+      'textCenter'  => 'text-center',
+      'textRight'   => 'text-right',
+      'textMuted'   => 'text-muted',
+      'textPrimary' => 'text-primary',
+      'textSuccess' => 'text-success',
+      'textInfo'    => 'text-info',
+      'textWarning' => 'text-warning',
+      'textDanger'  => 'text-danger',
+    );
+
+    if ($pattern[$name])
+      return $this->addClass($pattern[$name]);
+
+    return parent::__call($name, $args);
+  }
 }

@@ -105,6 +105,39 @@ class TwitterBootstrapTest extends \PHPUnit_Framework_TestCase
   {
     $this->assertEquals('<p class="lead"></p>', (string)Tag::lead());
     $this->assertEquals('<p class="lead">lead text</p>', (string)Tag::lead('lead text'));
+    $this->assertEquals('<p class="lead">lead text</p>', (string)Tag::p('lead text')->lead());
+
+    $this->assertEquals('<p class="text-left"></p>', (string)Tag::textLeft());
+    $this->assertEquals('<p class="text-left"></p>', (string)Tag::p()->textLeft());
+    $this->assertEquals('<p class="text-center"></p>', (string)Tag::textCenter());
+    $this->assertEquals('<p class="text-center"></p>', (string)Tag::p()->textCenter());
+    $this->assertEquals('<p class="text-right"></p>', (string)Tag::textRight());
+    $this->assertEquals('<p class="text-right"></p>', (string)Tag::p()->textRight());
+    $this->assertEquals('<p class="text-muted"></p>', (string)Tag::textMuted());
+    $this->assertEquals('<p class="text-muted"></p>', (string)Tag::p()->textMuted());
+    $this->assertEquals('<p class="text-primary"></p>', (string)Tag::textPrimary());
+    $this->assertEquals('<p class="text-primary"></p>', (string)Tag::p()->textPrimary());
+    $this->assertEquals('<p class="text-success"></p>', (string)Tag::textSuccess());
+    $this->assertEquals('<p class="text-success"></p>', (string)Tag::p()->textSuccess());
+    $this->assertEquals('<p class="text-info"></p>', (string)Tag::textInfo());
+    $this->assertEquals('<p class="text-info"></p>', (string)Tag::p()->textInfo());
+    $this->assertEquals('<p class="text-warning"></p>', (string)Tag::textWarning());
+    $this->assertEquals('<p class="text-warning"></p>', (string)Tag::p()->textWarning());
+    $this->assertEquals('<p class="text-danger"></p>', (string)Tag::textDanger());
+    $this->assertEquals('<p class="text-danger"></p>', (string)Tag::p()->textDanger());
+
+    $this->assertEquals('<abbr title="attribute">attr</abbr>', (string)Tag::abbr('attribute', 'attr'));
+    $this->assertEquals('<abbr title="HyperText Markup Language" class="initialism">HTML</abbr>', (string)Tag::abbrInitialism('HyperText Markup Language', 'HTML'));
+
+    $this->assertEquals('<ul class="list-unstyled"></ul>', (string)Tag::ulUnstyled());
+    $this->assertEquals('<ul class="list-unstyled"><li>...</li></ul>', (string)Tag::ulUnstyled(Tag::li('...')));
+    $this->assertEquals('<ol class="list-unstyled"></ol>', (string)Tag::olUnstyled());
+    $this->assertEquals('<ol class="list-unstyled"><li>...</li></ol>', (string)Tag::olUnstyled(Tag::li('...')));
+    $this->assertEquals('<ul class="list-inline"></ul>', (string)Tag::ulInline());
+    $this->assertEquals('<ul class="list-inline"><li>...</li></ul>', (string)Tag::ulInline(Tag::li('...')));
+    $this->assertEquals('<ol class="list-inline"></ol>', (string)Tag::olInline());
+    $this->assertEquals('<ol class="list-inline"><li>...</li></ol>', (string)Tag::olInline(Tag::li('...')));
+    $this->assertEquals('<dl class="dl-horizontal"></dl>', (string)Tag::dlHorizontal());
 
   }
 
@@ -156,8 +189,10 @@ class TwitterBootstrapTest extends \PHPUnit_Framework_TestCase
 
 
 
-    $this->assertEquals('<textarea class="form-control" name="record[body]" cols="3" rows="9">'."body contents".'</textarea>',
-      (string)Tag::textarea('record[body]', "body contents", null, array('cols' => 3, 'rows' => 9)));
+    $this->assertEquals(
+      '<textarea class="form-control" name="record[body]" cols="3" rows="9">'."body contents".'</textarea>',
+      (string)Tag::textarea('record[body]', "body contents", null, array('cols' => 3, 'rows' => 9))
+    );
 
     $this->assertEquals('<div class="form-group"></div>', (string)Tag::formGroup());
     $this->assertEquals('<div class="form-group"><label for="record_email">Email address</label><input type="email" class="form-control" id="record_email" name="record[email]" placeholder="Enter email"></div>',

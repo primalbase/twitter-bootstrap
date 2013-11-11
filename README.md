@@ -1,7 +1,7 @@
-twitter-bootstrap
-=================
+TwitterBootstrap for PHP
+=========================
 
-HTML markup class with Twitter Bootstrap for PHP.
+HTML markup class.
 
 <pre>
 use Primalbase\TwitterBootstrap as Tag;
