@@ -12,7 +12,7 @@ class CSS extends AbstractTagFactory {
         'lang' => 'en',
       ),
       'factory' => array(
-        'Primalbase\TwitterBootstrap\CSS',
+        __CLASS__,
         'htmlFactory',
       ),
     ),
@@ -23,7 +23,7 @@ class CSS extends AbstractTagFactory {
         'content' => 'width=device-width, initial-scale=1.0',
       ),
       'factory' => array(
-        'Primalbase\TwitterBootstrap\CSS',
+        __CLASS__,
         'viewportFactory',
       ),
     ),
@@ -34,7 +34,7 @@ class CSS extends AbstractTagFactory {
         'class' => 'img-responsive',
       ),
       'factory' => array(
-        'Primalbase\TwitterBootstrap\CSS',
+        __CLASS__,
         'imgResponsiveFactory',
       ),
     ),

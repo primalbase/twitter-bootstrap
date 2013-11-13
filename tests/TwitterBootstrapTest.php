@@ -98,9 +98,6 @@ class TwitterBootstrapTest extends \PHPUnit_Framework_TestCase
       (string)Tag::colXs(1)->sm(2)->md(3)->lg(4)->xsOffset(1)->smOffset(2)->mdOffset(3)->lgOffset(4));
   }
 
-  /**
-   * @todo Not completed yet.
-   */
   public function testCSSTypography()
   {
     $this->assertEquals('<p class="lead"></p>', (string)Tag::lead());
@@ -141,16 +138,58 @@ class TwitterBootstrapTest extends \PHPUnit_Framework_TestCase
 
   }
 
-  public function testCSSOther()
+  public function testCSSCode()
   {
-    // Code
-    // Not completed yet.
+    $this->assertEquals('<pre class="pre-scrollable"></pre>', (string)Tag::preScrollable());
+  }
 
-    // Table
-    // Not completed yet.
+  /**
+   * @todo Not implemented yet.
+   */
+  public function testCSSTable()
+  {
+    $this->assertEquals('<table class="table"></table>', (string)Tag::table());
+    $this->assertEquals('<table class="table table-striped"></table>', (string)Tag::tableStriped());
+    $this->assertEquals('<table class="table table-bordered"></table>', (string)Tag::tableBordered());
+    $this->assertEquals('<table class="table table-hover"></table>', (string)Tag::tableHover());
+    $this->assertEquals('<table class="table table-condensed"></table>', (string)Tag::tableCondensed());
+    $this->assertInstanceOf('Primalbase\TwitterBootstrap\CSS\Table', Tag::table());
+    $this->assertEquals('<tr></tr>', (string)Tag::table()->appendRow());
+    $this->assertEquals('<table class="table"><tr></tr></table>', (string)Tag::table()->appendRow()->end());
+    $this->assertEquals('<table class="table"><tr class="active"></tr></table>', (string)Tag::table()->appendRowActive()->end());
+    $this->assertEquals('<table class="table"><tr class="success"></tr></table>', (string)Tag::table()->appendRowSuccess()->end());
+    $this->assertEquals('<table class="table"><tr class="warning"></tr></table>', (string)Tag::table()->appendRowWarning()->end());
+    $this->assertEquals('<table class="table"><tr class="danger"></tr></table>', (string)Tag::table()->appendRowDanger()->end());
 
-    // Forms
-    // Not completed yet.
+    $this->assertInstanceOf('Primalbase\TwitterBootstrap\CSS\Table\Row', Tag::table()->appendRow());
+    $this->assertEquals('<tr></tr>', (string)Tag::table()->appendRow()->close()->getRow());
+    $this->assertEquals('<tr></tr>', (string)Tag::table()->appendRow());
+    $this->assertEquals('<tr class="active"></tr>', (string)Tag::table()->appendRow()->active());
+
+    $row = Tag::tableRow();
+    $this->assertInstanceOf('Primalbase\TwitterBootstrap\CSS\Table\Row', Tag::tableRow());
+    $this->assertEquals('<th>hoge</th>', (string)$row->appendTh('hoge'));
+    $this->assertEquals('<th class="active"></th>', (string)$row->appendThActive());
+    $this->assertEquals('<th class="success"></th>', (string)$row->appendThSuccess());
+    $this->assertEquals('<th class="warning"></th>', (string)$row->appendThWarning());
+    $this->assertEquals('<th class="danger"></th>', (string)$row->appendThDanger());
+    $this->assertEquals('<td>fuga</td>', (string)$row->appendTd('fuga'));
+    $this->assertEquals('<td class="active"></td>', (string)$row->appendTdActive());
+    $this->assertEquals('<td class="success"></td>', (string)$row->appendTdSuccess());
+    $this->assertEquals('<td class="warning"></td>', (string)$row->appendTdWarning());
+    $this->assertEquals('<td class="danger"></td>', (string)$row->appendTdDanger());
+
+    $this->assertEquals('<div class="table-responsive"><table class="table"></table></div>', (string)Tag::tableResponsive());
+    $this->assertEquals('<div class="table-responsive"><table class="table"><tr></tr></table></div>', (string)Tag::tableResponsive()->appendRow()->end());
+    $this->assertEquals('<tr></tr>', (string)Tag::tableResponsive()->appendRow());
+  }
+
+
+  /**
+   * @todo Not implemented yet.
+   */
+  public function testCSSForms()
+  {
     // Last implement a input search.
     $this->assertEquals('<input type="text" class="form-control">',
       (string)Tag::input());
@@ -205,6 +244,38 @@ class TwitterBootstrapTest extends \PHPUnit_Framework_TestCase
       ))
     );
     $this->assertEquals('<form role="form"></form>', (string)Tag::form());
+  }
+
+  /**
+   * @todo Not implemented yet.
+   */
+  public function testCSSButtons()
+  {
+
+  }
+
+  /**
+   * @todo Not implemented yet.
+   */
+  public function testCSSImages()
+  {
+
+  }
+
+  /**
+   * @todo Not implemented yet.
+   */
+  public function testCSSHelper()
+  {
+
+  }
+
+  /**
+   * @todo Not implemented yet.
+   */
+  public function testCSSResponsiveUtilities()
+  {
+
   }
 
   public function testComponents()

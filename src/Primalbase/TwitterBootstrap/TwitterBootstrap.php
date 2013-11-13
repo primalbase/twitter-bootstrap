@@ -24,8 +24,8 @@ namespace Primalbase\TwitterBootstrap;
 
 use Primalbase\Tag\Tag;
 use Primalbase\TwitterBootstrap\CSS;
-use Primalbase\TwitterBootstrap\CSS\GridSystem;
 use Primalbase\TwitterBootstrap\CSS\Typography;
+use Primalbase\TwitterBootstrap\CSS\Table;
 
 /**
  * Class TwitterBootstrap
@@ -33,51 +33,73 @@ use Primalbase\TwitterBootstrap\CSS\Typography;
  *
  * CSS
  *
- * @method static CSS html(\string $lang = "en", \mixed $options = null)
- * @method static CSS viewport(\Boolean $user_scalable = null, \string $minimum_scale = null, \string $maximum_scale = null, \mixed $options = null)
- * @method static CSS imgResponsive(\string $src = "#", \string $alt = "", \mixed $options = null)
- * @method static CSS container(\mixed $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS html(\string $lang = "en", \mixed $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS viewport(\Boolean $user_scalable = null, \string $minimum_scale = null, \string $maximum_scale = null, \mixed $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS imgResponsive(\string $src = "#", \string $alt = "", \mixed $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS container(\mixed $options = null)
  *
  * CSS/Grid system
  *
- * @method static GridSystem row(\mixed $options = null)
- * @method static GridSystem col(\integer $col, \mixed $options = null) Phones <768px
- * @method static GridSystem colXs(\integer $col, \mixed $options = null) Phones <768px
- * @method static GridSystem colSm(\integer $col, \mixed $options = null) Tablets ≥768px
- * @method static GridSystem colMd(\integer $col, \mixed $options = null) Desktops ≥992px
- * @method static GridSystem colLg(\integer $col, \mixed $options = null) Desktops ≥1200px
+ * @method static \Primalbase\TwitterBootstrap\CSS\GridSystem row(\mixed $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\GridSystem col(\integer $col, \mixed $options = null) Phones <768px
+ * @method static \Primalbase\TwitterBootstrap\CSS\GridSystem colXs(\integer $col, \mixed $options = null) Phones <768px
+ * @method static \Primalbase\TwitterBootstrap\CSS\GridSystem colSm(\integer $col, \mixed $options = null) Tablets ≥768px
+ * @method static \Primalbase\TwitterBootstrap\CSS\GridSystem colMd(\integer $col, \mixed $options = null) Desktops ≥992px
+ * @method static \Primalbase\TwitterBootstrap\CSS\GridSystem colLg(\integer $col, \mixed $options = null) Desktops ≥1200px
  *
  * CSS/Typography
  *
- * @method static typography lead(\mixed $options = null)
- * @method static typography textLeft(\mixed $options = null)
- * @method static typography textCenter(\mixed $options = null)
- * @method static typography textRight(\mixed $options = null)
- * @method static Typography abbr(\string $title = null, $options = null)
- * @method static Typography abbrInitialism(\string $title = null, $options = null)
- * @method static Typography ulUnstyled($options = null)
- * @method static Typography olUnstyled($options = null)
- * @method static Typography ulInline($options = null)
- * @method static Typography olInline($options = null)
- * @method static Typography dlHorizontal($options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Typography lead(\mixed $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Typography textLeft(\mixed $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Typography textCenter(\mixed $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Typography textRight(\mixed $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Typography abbr(\string $title = null,\mixed $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Typography abbrInitialism(\string $title = null,\mixed $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Typography ulUnstyled(\mixed $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Typography olUnstyled(\mixed $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Typography ulInline(\mixed $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Typography olInline(\mixed $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Typography dlHorizontal(\mixed $options = null)
  *
  * CSS/Code
  *
- * @todo CSS/Code isn't defined yet.
- * @todo CSS/Code isn't implemented yet.
- * @todo CSS/Code isn't tested yet.
+ * @method static \Primalbase\TwitterBootstrap\CSS\Code preScrollable(\mixed $options = null)
  *
  * CSS/Table
  *
- * @todo CSS/Table isn't defined yet.
- * @todo CSS/Table isn't implemented yet.
- * @todo CSS/Table isn't tested yet.
+ * @method static \Primalbase\TwitterBootstrap\CSS\Table table(\mixed $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Table tableStriped(\mixed $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Table tableBordered(\mixed $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Table tableHover(\mixed $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Table tableCondensed(\mixed $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Table\Row tableRow(\mixed $options = null)
+ * @see \Primalbase\TwitterBootstrap\Table::appendRow(\mixed $options = null)
+ * @see \Primalbase\TwitterBootstrap\Table::appendRowActive(\mixed $options = null)
+ * @see \Primalbase\TwitterBootstrap\Table::appendRowSuccess(\mixed $options = null)
+ * @see \Primalbase\TwitterBootstrap\Table::appendRowWarning(\mixed $options = null)
+ * @see \Primalbase\TwitterBootstrap\Table::appendRowDanger(\mixed $options = null)
+ * @see \Primalbase\TwitterBootstrap\Table\Row::getRow(\integer $row = null)
+ * @see \Primalbase\TwitterBootstrap\Table\Row::active()
+ * @see \Primalbase\TwitterBootstrap\Table\Row::success()
+ * @see \Primalbase\TwitterBootstrap\Table\Row::warning()
+ * @see \Primalbase\TwitterBootstrap\Table\Row::danger()
+ * @see \Primalbase\TwitterBootstrap\Table\Row::appendTh(\mixed $options = null)
+ * @see \Primalbase\TwitterBootstrap\Table\Row::appendThActive(\mixed $options = null)
+ * @see \Primalbase\TwitterBootstrap\Table\Row::appendThSuccess(\mixed $options = null)
+ * @see \Primalbase\TwitterBootstrap\Table\Row::appendThWarning(\mixed $options = null)
+ * @see \Primalbase\TwitterBootstrap\Table\Row::appendThDanger(\mixed $options = null)
+ * @see \Primalbase\TwitterBootstrap\Table\Row::appendTd(\mixed $options = null)
+ * @see \Primalbase\TwitterBootstrap\Table\Row::appendTdActive(\mixed $options = null)
+ * @see \Primalbase\TwitterBootstrap\Table\Row::appendTdSuccess(\mixed $options = null)
+ * @see \Primalbase\TwitterBootstrap\Table\Row::appendTdWarning(\mixed $options = null)
+ * @see \Primalbase\TwitterBootstrap\Table\Row::appendTdDanger(\mixed $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Table tableResponsive(\mixed $options = null)
  *
  * CSS/Forms
  *
- * @method static TwitterBootstrap formControl()
- * @method static TwitterBootstrap formGroup(\mixed $options)
- * @method static TwitterBootstrap form(\mixed $options)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Forms formControl()
+ * @method static \Primalbase\TwitterBootstrap\CSS\Forms formGroup(\mixed $options)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Forms form(\mixed $options)
  *
  * CSS/Forms/Inline form
  *
@@ -201,6 +223,9 @@ class TwitterBootstrap extends Tag
     'Primalbase\TwitterBootstrap\CSS',
     'Primalbase\TwitterBootstrap\CSS\GridSystem',
     'Primalbase\TwitterBootstrap\CSS\Typography',
+    'Primalbase\TwitterBootstrap\CSS\Code',
+    'Primalbase\TwitterBootstrap\CSS\Table\Row', // Duplicate method name. Should be insert before Table.
+    'Primalbase\TwitterBootstrap\CSS\Table',
     'Primalbase\TwitterBootstrap\CSS\Forms',
     'Primalbase\TwitterBootstrap\Components\Navbar',
     'Primalbase\TwitterBootstrap\Components\Panels',
@@ -210,83 +235,12 @@ class TwitterBootstrap extends Tag
 
   protected static $configurationsAll = array();
 
-  public static function build($callTagName, $config, array $args=array())
-  {
-    if ($config['factory'])
-    {
-      if (!is_callable($config['factory']))
-        throw new \Exception('Don\'t call factory '.$callTagName);
-
-      $tag = call_user_func($config['factory'], $config, $args);
-    }
-    else
-    {
-      $tag = static::create($config['tagName'], $config['attributes']);
-      foreach ($args as $arg)
-        $tag->append($arg);
-    }
-
-    if (!empty($config['options']))
-    {
-      $options = $config['options'];
-
-      // ベースネームを削除
-      // panelBody -> Body
-      if ($segment = substr($callTagName, strlen($config['name'])))
-      {
-        call_user_func($_f = function () use (&$_f, $tag, &$segment, $options)
-        {
-          foreach ($options as $name => $class_or_attributes)
-          {
-            if (preg_match('/^('.$name.')/', $segment, $m))
-            {
-              $match_str = $m[1];
-              if (is_array($class_or_attributes))
-              {
-
-                foreach ($class_or_attributes as $ckey => $cvalue)
-                {
-                  if (preg_match('/^[0-9]+$/', $ckey))
-                    $tag->attr($cvalue);
-                  elseif ($ckey == 'tagName')
-                    $tag->tagName($cvalue);
-                  // 値のみ
-                  else
-                    $tag->attr($ckey, $cvalue);
-
-                }
-              }
-              else
-              {
-                $class = preg_replace('/^'.$name.'/', $class_or_attributes, $match_str);
-                $tag->addClass($class);
-              }
-              $segment = substr($segment, strlen($match_str));
-
-              $_f();
-            }
-          }
-        });
-      }
-    }
-
-    if ($config['callback'])
-    {
-      if (!is_callable(array($tag, $config['callback'])))
-        throw new \Exception('Don\'t call callback '.$callTagName);
-      call_user_func(array($config['callback'], $tag), $args);
-    }
-
-    return $tag;
-  }
-
   public static function __callStatic($tagName, array $args)
   {
     if (!static::$configurationsAll)
     {
       foreach (static::$library as $lib)
       {
-        $conf =  $lib::getFormatConfigurations();
         static::$configurationsAll = array_merge(
           static::$configurationsAll,
           $lib::getFormatConfigurations()
@@ -297,30 +251,23 @@ class TwitterBootstrap extends Tag
     foreach (static::$configurationsAll as $config)
     {
       if (strpos($tagName, $config['name']) === 0)
-        return static::build($tagName, $config, $args);
-    }
-
-    // span{n} -> gridSpan(n)
-    if (preg_match('/^span(\d+)$/', $tagName, $m))
-    {
-      array_unshift($args, $m[1]);
-      return call_user_func_array(array(get_called_class(), 'gridSpan'), $args);
+        return $config['class']::build($tagName, $config, $args);
     }
 
     return call_user_func_array(array(parent, $tagName), $args);
   }
 
   /**
-   * @method Typography lead()
-   * @method Typography textLeft()
-   * @method Typography textCenter()
-   * @method Typography textRight()
-   * @method Typography textMuted()
-   * @method Typography textPrimary()
-   * @method Typography textSuccess()
-   * @method Typography textInfo()
-   * @method Typography textWarning()
-   * @method Typography textDanger()
+   * @method TwitterBootstrap lead()
+   * @method TwitterBootstrap textLeft()
+   * @method TwitterBootstrap textCenter()
+   * @method TwitterBootstrap textRight()
+   * @method TwitterBootstrap textMuted()
+   * @method TwitterBootstrap textPrimary()
+   * @method TwitterBootstrap textSuccess()
+   * @method TwitterBootstrap textInfo()
+   * @method TwitterBootstrap textWarning()
+   * @method TwitterBootstrap textDanger()
    *
    * @param string $name
    * @param array $args

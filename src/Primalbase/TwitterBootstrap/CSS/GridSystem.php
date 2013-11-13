@@ -36,31 +36,31 @@ class GridSystem extends AbstractTagFactory {
     'row' => 'row',
     'colLg' => array(
       'factory' => array(
-        'Primalbase\TwitterBootstrap\CSS\GridSystem',
+        __CLASS__,
         'colLgFactory',
       ),
     ),
     'colMd' => array(
       'factory' => array(
-        'Primalbase\TwitterBootstrap\CSS\GridSystem',
+        __CLASS__,
         'colMdFactory',
       ),
     ),
     'colSm' => array(
       'factory' => array(
-        'Primalbase\TwitterBootstrap\CSS\GridSystem',
+        __CLASS__,
         'colSmFactory',
       ),
     ),
     'colXs' => array(
       'factory' => array(
-        'Primalbase\TwitterBootstrap\CSS\GridSystem',
+        __CLASS__,
         'colXsFactory',
       ),
     ),
     'col' => array(
       'factory' => array(
-        'Primalbase\TwitterBootstrap\CSS\GridSystem',
+        __CLASS__,
         'colXsFactory',
       ),
     )

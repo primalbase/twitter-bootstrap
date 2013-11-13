@@ -16,7 +16,7 @@ class Forms extends AbstractTagFactory {
         'type' => 'hidden'
       ),
       'factory' => array(
-        'Primalbase\TwitterBootstrap\CSS\Forms',
+        __CLASS__,
         'inputHiddenFactory',
       ),
     ),
@@ -30,7 +30,7 @@ class Forms extends AbstractTagFactory {
         'Required' => array('required'),
       ),
       'factory' => array(
-        'Primalbase\TwitterBootstrap\CSS\Forms',
+        __CLASS__,
         'inputDatetimeFactory',
       ),
     ),
@@ -49,7 +49,7 @@ class Forms extends AbstractTagFactory {
         'Required' => array('required'),
       ),
       'factory' => array(
-        'Primalbase\TwitterBootstrap\CSS\Forms',
+        __CLASS__,
         'inputFactory',
       ),
     ),
@@ -59,7 +59,7 @@ class Forms extends AbstractTagFactory {
         'class' => 'form-control',
       ),
       'factory' => array(
-        'Primalbase\TwitterBootstrap\CSS\Forms',
+        __CLASS__,
         'textareaFactory',
       ),
     ),
@@ -68,7 +68,7 @@ class Forms extends AbstractTagFactory {
         'class' => 'form-group',
       ),
       'factory' => array(
-        'Primalbase\TwitterBootstrap\CSS\Forms',
+        __CLASS__,
         'formGroupFactory',
       ),
     ),
@@ -93,7 +93,7 @@ class Forms extends AbstractTagFactory {
    */
   public static function formGroupFactory($config, $args)
   {
-    $tag = Tag::create($config['tagName']);
+    $tag = static::create($config['tagName']);
     foreach ($config['attributes'] as $name => $value)
       $tag->{$name}($value);
 
@@ -118,18 +118,18 @@ class Forms extends AbstractTagFactory {
         $label = null;
         $input = null;
         if ($field['label'])
-          $label = Tag::label(array('for' => $field['id']), $field['label']);
+          $label = static::label(array('for' => $field['id']), $field['label']);
 
         unset($field['label']);
 
         if ($field['type'] == 'textarea')
         {
           unset($field['type']);
-          $input = Tag::create('textarea', $field);
+          $input = static::create('textarea', $field);
         }
         else
         {
-          $input = Tag::create('input', $field);
+          $input = static::create('input', $field);
         }
         $tag->append($label, $input);
       }
@@ -156,7 +156,7 @@ class Forms extends AbstractTagFactory {
     if (isset($args[2]) && is_array($args[2]))
       $attributes = array_merge($attributes, $args[2]);
 
-    return Tag::create($tagName, $attributes);
+    return static::create($tagName, $attributes);
   }
 
   /**
@@ -179,7 +179,7 @@ class Forms extends AbstractTagFactory {
     if (isset($args[3]) && is_array($args[3]))
       $attributes = array_merge($attributes, $args[3]);
 
-    return Tag::create($tagName, $attributes);
+    return static::create($tagName, $attributes);
   }
 
   public static function inputDatetimeFactory($config, $args)
@@ -201,7 +201,7 @@ class Forms extends AbstractTagFactory {
     if (isset($args[5]) && is_array($args[5]))
       $attributes = array_merge($attributes, $args[5]);
 
-    return Tag::create($tagName, $attributes);
+    return static::create($tagName, $attributes);
   }
 
   /**
@@ -224,7 +224,7 @@ class Forms extends AbstractTagFactory {
     if (isset($args[3]) && is_array($args[3]))
       $attributes = array_merge($attributes, $args[3]);
 
-    return Tag::create($tagName, $attributes)->append($value);
+    return static::create($tagName, $attributes)->append($value);
   }
 
 }
