@@ -21,8 +21,8 @@ class Typography extends AbstractTagFactory {
         ),
       ),
       'text' => array(
-        'regexp'  => '/^text[^a]/', // unmatched textarea
-        'name'    => 'text',
+        'prefix'  => 'text',
+        'regexp'  => '[^a]', // unmatched textarea
         'tagName' => 'p',
         'options' => array(
           'Left'    => 'text-left',

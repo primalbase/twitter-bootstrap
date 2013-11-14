@@ -25,10 +25,12 @@ class Forms extends AbstractTagFactory {
           'value' => '@2',
         ),
       ),
-      'formDatetime' => array(
+      'formTimes' => array(
+        'prefix'  => 'form',
+        'regexp'  => '(Date|Datetime|Month|Week|Time|DatetimeLocal)',
         'tagName' => 'input',
         'attributes' => array(
-          'type'  => 'datetime',
+          'type'  => null,
           'class' => 'form-control',
           'name'  => '@1',
           'value' => '@2',
@@ -37,6 +39,12 @@ class Forms extends AbstractTagFactory {
           'step'  => '@5',
         ),
         'options' => array(
+          'Datetime' => array('type' => 'datetime'),
+          'Date'     => array('type' => 'date'),
+          'Month'    => array('type' => 'month'),
+          'Week'     => array('type' => 'week'),
+          'Time'     => array('type' => 'time'),
+          'DatetimeLocal' => array('type' => 'datetime-local'),
           'Required' => array('required' => false),
         ),
       ),
@@ -62,8 +70,8 @@ class Forms extends AbstractTagFactory {
       // formと重複するため、keyではなくregexpでマッチさせる
       // regexpを使用する場合、nameの指定も必要
       'formInputs' => array(
-        'regexp'     => '/^form(Text|Email|Search|Tel|Url|Password)/',
-        'name'       => 'form',
+        'prefix'     => 'form',
+        'regexp'     => '(Text|Email|Search|Tel|Url|Password)',
         'tagName'    => 'input',
         'attributes' => array(
           'type', // 並び順を先頭にするため、空の属性を定義する

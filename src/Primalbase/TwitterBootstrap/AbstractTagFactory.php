@@ -10,18 +10,18 @@ abstract class AbstractTagFactory extends Tag {
    *
    * - Pattern 1.
    * <code>
-   * string {name} => string {html class attribute}
+   * string {prefix} => string {html class attribute}
    * </code>
    * @example 'inline' => 'form-inline' > Tag::inline() > <div class="form-inline"></div>
    *
    * - Pattern 2.
    * <code>
-   * string {name} => array {configuration}
+   * string {prefix} => array {configuration}
    * </code>
    *
    * If call to Tag::aaa() when defined 'aaaBbb' and 'aaa', The factory use fastest define.
    *
-   * - string name
+   * - string prefix
    *   Identifier. match called method name to the left.
    *   or if defined regexp, matched it.
    *
@@ -66,20 +66,20 @@ abstract class AbstractTagFactory extends Tag {
     if (is_array($configOrClass))
     {
       $config = array_merge(array(
-        'name' => $key,
+        'prefix' => $key,
       ), $configOrClass);
     }
     else
     {
       $config = array(
-        'name'       => $key,
+        'prefix'     => $key,
         'attributes' => array('class' => $configOrClass),
       );
     }
 
     $config = array_merge(array(
       'class'        => get_called_class(),
-      'name'         => '',
+      'prefix'       => '',
       'options'      => array(),
       'attributes'   => array(),
       'tagName'      => 'div',
@@ -136,7 +136,7 @@ abstract class AbstractTagFactory extends Tag {
 
     // 関数名からタグを除いた文字列
     // inputTextRequired -> TextRequired
-    $opt_str = substr($called_name, strlen($config['name']));
+    $opt_str = substr($called_name, strlen($config['prefix']));
     if ($opt_str)
       $tag->__applyOptions($opt_str, $config['options']);
 
@@ -145,7 +145,7 @@ abstract class AbstractTagFactory extends Tag {
       if (!is_callable(array($tag, $config['callback'])))
         throw new \Exception('Don\'t call callback '.$called_name);
 
-      call_user_func(array($config['callback'], $tag), $args);
+      call_user_func(array($tag, $config['callback']), $args);
     }
 
     return $tag;

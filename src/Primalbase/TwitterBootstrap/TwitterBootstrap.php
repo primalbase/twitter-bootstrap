@@ -108,9 +108,6 @@ use Primalbase\Tag\Tag;
  *
  * CSS/Forms/Supported controls/Inputs
  *
- * @todo CSS/Forms/Supported controls/Inputs isn't implemented yet.
- * @todo CSS/Forms/Supported controls/Inputs isn't tested yet.
- *
  * @method static \Primalbase\TwitterBootstrap\CSS\Forms formText(\string $name = null, \string $value = null, \string $placeholder = null, array $options = null)
  * @method static \Primalbase\TwitterBootstrap\CSS\Forms formTextRequired(\string $name = null, \string $value = null, \string $placeholder = null, array $options = null)
  * @method static \Primalbase\TwitterBootstrap\CSS\Forms formHidden(\string $name = null, \string $value = null, array $options = null)
@@ -146,18 +143,18 @@ use Primalbase\Tag\Tag;
  *
  * Css/Forms/Supported controls/Checkboxes and radios
  *
- * @method static TwitterBootstrap formCheckbox(\string $name, \string $value, \boolean $checked, array $options)
- * @method static TwitterBootstrap formCheckboxRequired(\string $name, \string $value, \boolean $checked, array $options) CSS\Forms
- * @method static TwitterBootstrap formRadio(\string $name, \string $value, \boolean $checked, array $options) CSS\Forms
- * @method static TwitterBootstrap formRadioRequired(\string $name, \string $value, \boolean $checked, array $options) CSS\Forms
- * @method static TwitterBootstrap formFile(\string $name, \string $accept="image/*", array $options) CSS\Forms
- * @method static TwitterBootstrap formFileRequired(\string $name, \string $accept="image/*", array $options) CSS\Forms
- * @method static TwitterBootstrap formFileMultiple(\string $name, \string $accept="image/*", array $options) CSS\Forms
- * @method static TwitterBootstrap formFileMultipleRequired(\string $name, \string $accept="image/*", array $options) CSS\Forms
- * @method static TwitterBootstrap formSubmit(\string $value, array $options) CSS\Forms
- * @method static TwitterBootstrap formSubmitImage(\string $src, \string $alt, array $options) CSS\Forms
- * @method static TwitterBootstrap formReset(\string $value, array $options) CSS\Forms
- * @method static TwitterBootstrap formButton(\string $value, array $options) CSS\Forms
+ * @method static \Primalbase\TwitterBootstrap\CSS\Forms formCheckbox(\string $name = null, \string $value = null, \boolean $checked = false, array $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Forms formCheckboxRequired(\string $name = null, \string $value = null, \boolean $checked = false, array $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Forms formRadio(\string $name = null, \string $value = null, \boolean $checked = false, array $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Forms formRadioRequired(\string $name = null, \string $value = null, \boolean $checked = false, array $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Forms formFile(\string $name = null, \string $accept="image/*", array $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Forms formFileRequired(\string $name = null, \string $accept="image/*", array $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Forms formFileMultiple(\string $name = null, \string $accept="image/*", array $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Forms formFileMultipleRequired(\string $name = null, \string $accept="image/*", array $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Forms formSubmit(\string $value = null, array $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Forms formSubmitImage(\string $src = null, \string $alt = null, array $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Forms formReset(\string $value = null, array $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Forms formButton(\string $value = null, array $options = null)
  *
  * @method static TwitterBootstrap checkbox()
  * @method static TwitterBootstrap checkboxInline()
@@ -235,10 +232,10 @@ class TwitterBootstrap extends Tag
     {
       if ($config['regexp'])
       {
-        if (preg_match($config['regexp'], $tagName))
+        if (preg_match('/^'.$config['prefix'].$config['regexp'].'/', $tagName))
           return $config['class']::build($tagName, $config, $args);
       }
-      elseif (strpos($tagName, $config['name']) === 0)
+      elseif (strpos($tagName, $config['prefix']) === 0)
         return $config['class']::build($tagName, $config, $args);
     }
 
@@ -280,5 +277,25 @@ class TwitterBootstrap extends Tag
       return $this->addClass($pattern[$name]);
 
     return parent::__call($name, $args);
+  }
+
+  public static function _camelize($name)
+  {
+    $name = strtolower($name);
+    $name = str_replace('-', ' ', $name);
+    $name = ucwords($name);
+    $name = str_replace(' ', '', $name);
+    $name = lcfirst($name);
+
+    return $name;
+  }
+
+  public static function _chaincase($name)
+  {
+    $name = preg_replace('/([A-Z])/', '-$1', $name);
+    $name = strtolower($name);
+    $name = ltrim($name, '-');
+
+    return $name;
   }
 }
