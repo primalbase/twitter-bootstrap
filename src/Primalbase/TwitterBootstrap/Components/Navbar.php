@@ -6,57 +6,60 @@ use Primalbase\TwitterBootstrap\AbstractTagFactory;
 
 class Navbar extends AbstractTagFactory {
 
-  protected static $configurations = array(
-    'navbarHeader' => 'navbar-header',
-    'navbarToggle' => array(
-      'tagName'    => 'button',
-      'callback'   => 'navbarToggleCallback',
-      'attributes' => array(
-        'class'       => 'navbar-toggle',
-        'data-toggle' => 'collapse',
-        'data-target' => '.navbar-ex1-collapse',
-      )
-    ),
-    'navbarNav' => array(
-      'tagName' => 'ul',
-      'attributes' => array(
-        'class' => 'nav navbar-nav'
+  protected static function configurations()
+  {
+    return array(
+      'navbarHeader' => 'navbar-header',
+      'navbarToggle' => array(
+        'tagName'    => 'button',
+        'callback'   => 'navbarToggleCallback',
+        'attributes' => array(
+          'class'       => 'navbar-toggle',
+          'data-toggle' => 'collapse',
+          'data-target' => '.navbar-ex1-collapse',
+        )
       ),
-      'options' => array(
-        'Left'  => 'navbar-left',
-        'Right' => 'navbar-right',
-      )
-    ),
-    'navbarBrand' => array(
-      'tagName' => 'a',
-      'attributes' => array(
-        'class' => 'navbar-brand',
-        'href'  => '#',
-      )
-    ),
-    'navbarCollapse' => 'collapse navbar-collapse navbar-ex1-collapse',
-    'navbarForm' => array(
-      'tagName' => 'form',
-      'attributes' => array(
-        'class' => 'navbar-form',
-        'role'  => 'search',
+      'navbarNav' => array(
+        'tagName' => 'ul',
+        'attributes' => array(
+          'class' => 'nav navbar-nav'
+        ),
+        'options' => array(
+          'Left'  => 'navbar-left',
+          'Right' => 'navbar-right',
+        )
       ),
-      'options' => array(
-        'Left'  => 'navbar-left',
-        'Right' => 'navbar-right'
-      )
-    ),
-    'navbar' => array(
-      'attributes' => array(
-        'class' => 'navbar'
+      'navbarBrand' => array(
+        'tagName' => 'a',
+        'attributes' => array(
+          'class' => 'navbar-brand',
+          'href'  => '#',
+        )
       ),
-      'options' => array(
-        'Inverse'     => 'navbar-inverse',
-        'FixedTop'    => 'navbar-fixed-top',
-        'FixedBottom' => 'navbar-fixed-bottom',
+      'navbarCollapse' => 'collapse navbar-collapse navbar-ex1-collapse',
+      'navbarForm' => array(
+        'tagName' => 'form',
+        'attributes' => array(
+          'class' => 'navbar-form',
+          'role'  => 'search',
+        ),
+        'options' => array(
+          'Left'  => 'navbar-left',
+          'Right' => 'navbar-right'
+        )
+      ),
+      'navbar' => array(
+        'attributes' => array(
+          'class' => 'navbar'
+        ),
+        'options' => array(
+          'Inverse'     => 'navbar-inverse',
+          'FixedTop'    => 'navbar-fixed-top',
+          'FixedBottom' => 'navbar-fixed-bottom',
+        )
       )
-    )
-  );
+    );
+  }
 
   public function navbarToggleCallback()
   {

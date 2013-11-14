@@ -5,41 +5,44 @@ use Primalbase\TwitterBootstrap\AbstractTagFactory;
 
 class CSS extends AbstractTagFactory {
 
-  protected static $configurations = array(
-    'html' => array(
-      'tagName'    => 'html',
-      'attributes' => array(
-        'lang' => 'en',
+  protected static function configurations()
+  {
+    return array(
+      'html' => array(
+        'tagName'    => 'html',
+        'attributes' => array(
+          'lang' => 'en',
+        ),
+        'factory' => array(
+          __CLASS__,
+          'htmlFactory',
+        ),
       ),
-      'factory' => array(
-        __CLASS__,
-        'htmlFactory',
+      'viewport' => array(
+        'tagName' => 'meta',
+        'attributes' => array(
+          'name'    => 'viewport',
+          'content' => 'width=device-width, initial-scale=1.0',
+        ),
+        'factory' => array(
+          __CLASS__,
+          'viewportFactory',
+        ),
       ),
-    ),
-    'viewport' => array(
-      'tagName' => 'meta',
-      'attributes' => array(
-        'name'    => 'viewport',
-        'content' => 'width=device-width, initial-scale=1.0',
+      'imgResponsive' => array(
+        'tagName' => 'img',
+        'attributes' => array(
+          'src'   => '#',
+          'class' => 'img-responsive',
+        ),
+        'factory' => array(
+          __CLASS__,
+          'imgResponsiveFactory',
+        ),
       ),
-      'factory' => array(
-        __CLASS__,
-        'viewportFactory',
-      ),
-    ),
-    'imgResponsive' => array(
-      'tagName' => 'img',
-      'attributes' => array(
-        'src'   => '#',
-        'class' => 'img-responsive',
-      ),
-      'factory' => array(
-        __CLASS__,
-        'imgResponsiveFactory',
-      ),
-    ),
-    'container' => 'container',
-  );
+      'container' => 'container',
+    );
+  }
 
   /**
    * html factory

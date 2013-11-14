@@ -5,12 +5,43 @@ use Primalbase\Tag\Tag;
 
 abstract class AbstractTagFactory extends Tag {
 
-  // protected static $configurations = array();
+  /**
+   * Configurations.
+   *
+   * - Pattern 1.
+   * <code>
+   * string {name} => string {html class attribute}
+   * </code>
+   * @example 'inline' => 'form-inline' > Tag::inline() > <div class="form-inline"></div>
+   *
+   * - Pattern 2.
+   * <code>
+   * string {name} => array {configuration}
+   * </code>
+   *
+   * If call to Tag::aaa() when defined 'aaaBbb' and 'aaa', The factory use fastest define.
+   *
+   * - string name
+   *   Identifier. match called method name to the left.
+   *   or if defined regexp, matched it.
+   *
+   * - Configuration array.
+   *  - string tagName div(default), p, input and other HTML tags.
+   *  - array attributes class, type, for and other HTML attributes.
+   *  - array options extend property. call to form generate <form></form> call to formHidden generate <input type="hidden">.
+   *  - mixed factory tag generate factory. must be callable.
+   *  - mixed callback call after tag generated. must be callable.
+   *
+   * @return array
+   */
+  abstract protected static function configurations();
+
+  protected $activeElement = null;
 
   public static function getFormatConfigurations()
   {
     $formatConfigurations = array();
-    foreach (static::$configurations as $key => $configOrClass)
+    foreach (static::configurations() as $key => $configOrClass)
       array_push($formatConfigurations, static::formatConfig($key, $configOrClass));
 
     return $formatConfigurations;
@@ -18,7 +49,7 @@ abstract class AbstractTagFactory extends Tag {
 
   public static function getConfig($tagName)
   {
-    foreach (static::$configurations as $key => $config)
+    foreach (static::configurations() as $key => $config)
     {
       $config = static::formatConfig($key, $config);
 
@@ -75,9 +106,32 @@ abstract class AbstractTagFactory extends Tag {
     }
     else
     {
+      $args_count       = count($args);
+      $used_arg_indexes = array();
+
+      foreach ($config['attributes'] as $key => $value)
+      {
+        if (preg_match('/^@(\d+)$/', $value, $m))
+        {
+          $index         = $m[1] - 1;
+          // default value is null.
+          if ($index >= $args_count)
+            $config['attributes'][$key] = null;
+          else
+            $config['attributes'][$key] = $args[$index];
+
+          array_push($used_arg_indexes, $index);
+        }
+      }
+
       $tag = static::create($config['tagName'], $config['attributes']);
-      foreach ($args as $arg)
+      foreach ($args as $index => $arg)
+      {
+        // 配置済みの引数は飛ばす
+        if (in_array($index, $used_arg_indexes))
+          continue;
         $tag->append($arg);
+      }
     }
 
     // 関数名からタグを除いた文字列
@@ -131,11 +185,6 @@ abstract class AbstractTagFactory extends Tag {
         }
       }
     });
-  }
-
-  public static function __callStatic($tagName, array $args)
-  {
-    return TwitterBootstrap::__callStatic($tagName, $args);
   }
 
 }

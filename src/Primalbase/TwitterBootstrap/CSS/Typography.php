@@ -11,58 +11,63 @@ use Primalbase\TwitterBootstrap\AbstractTagFactory;
  */
 class Typography extends AbstractTagFactory {
 
-  protected static $configurations = array(
-    'lead' => array(
-      'tagName' => 'p',
-      'attributes' => array(
-        'class' => 'lead',
+  protected static function configurations()
+  {
+    return array(
+      'lead' => array(
+        'tagName' => 'p',
+        'attributes' => array(
+          'class' => 'lead',
+        ),
       ),
-    ),
-    'text' => array(
-      'tagName' => 'p',
-      'options' => array(
-        'Left'    => 'text-left',
-        'Center'  => 'text-center',
-        'Right'   => 'text-right',
-        'Muted'   => 'text-muted',
-        'Primary' => 'text-primary',
-        'Success' => 'text-success',
-        'Info'    => 'text-info',
-        'Warning' => 'text-warning',
-        'Danger'  => 'text-danger',
-      )
-    ),
-    'abbr' => array(
-      'tagName' => 'abbr',
-      'options' => array(
-        'Initialism' => 'initialism',
+      'text' => array(
+        'regexp'  => '/^text[^a]/', // unmatched textarea
+        'name'    => 'text',
+        'tagName' => 'p',
+        'options' => array(
+          'Left'    => 'text-left',
+          'Center'  => 'text-center',
+          'Right'   => 'text-right',
+          'Muted'   => 'text-muted',
+          'Primary' => 'text-primary',
+          'Success' => 'text-success',
+          'Info'    => 'text-info',
+          'Warning' => 'text-warning',
+          'Danger'  => 'text-danger',
+        )
       ),
-      'factory' => array(
-        __CLASS__,
-        'abbrFactory',
+      'abbr' => array(
+        'tagName' => 'abbr',
+        'options' => array(
+          'Initialism' => 'initialism',
+        ),
+        'factory' => array(
+          __CLASS__,
+          'abbrFactory',
+        ),
       ),
-    ),
-    'ul' => array(
-      'tagName' => 'ul',
-      'options' => array(
-        'Unstyled' => 'list-unstyled',
-        'Inline'   => 'list-inline',
+      'ul' => array(
+        'tagName' => 'ul',
+        'options' => array(
+          'Unstyled' => 'list-unstyled',
+          'Inline'   => 'list-inline',
+        ),
       ),
-    ),
-    'ol' => array(
-      'tagName' => 'ol',
-      'options' => array(
-        'Unstyled' => 'list-unstyled',
-        'Inline'   => 'list-inline',
+      'ol' => array(
+        'tagName' => 'ol',
+        'options' => array(
+          'Unstyled' => 'list-unstyled',
+          'Inline'   => 'list-inline',
+        ),
       ),
-    ),
-    'dlHorizontal' => array(
-      'tagName' => 'dl',
-      'attributes' => array(
-        'class' => 'dl-horizontal',
+      'dlHorizontal' => array(
+        'tagName' => 'dl',
+        'attributes' => array(
+          'class' => 'dl-horizontal',
+        ),
       ),
-    ),
-  );
+    );
+  }
 
   /**
    * @param array $config

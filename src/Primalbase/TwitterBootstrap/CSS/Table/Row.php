@@ -5,11 +5,14 @@ use Primalbase\TwitterBootstrap\AbstractTagFactory;
 
 class Row extends AbstractTagFactory {
 
-  public static $configurations = array(
-    'tableRow' => array(
-      'tagName' => 'tr',
-    )
-  );
+  public static function configurations()
+  {
+    return array(
+      'tableRow' => array(
+        'tagName' => 'tr',
+      )
+    );
+  }
 
   public function active()
   {

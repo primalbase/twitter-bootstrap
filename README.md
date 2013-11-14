@@ -28,7 +28,7 @@ use Primalbase\TwitterBootstrap as Tag;
 
 `<div class="row"><div class="col-md-10 col-md-offset-2">text body</div></div>`
 
-### echo Tag::inputRequired('user') ###
+### echo Tag::formTextRequired('user') ###
 
 `<input type="text" class="form-control" name="user" required>`
 

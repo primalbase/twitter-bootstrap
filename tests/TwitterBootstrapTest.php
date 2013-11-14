@@ -51,7 +51,7 @@ class TwitterBootstrapTest extends \PHPUnit_Framework_TestCase
 
     $this->assertEquals(
       '<input type="text" class="form-control" name="user" required>',
-      (string)Tag::inputRequired('user')
+      (string)Tag::formTextRequired('user')
     );
   }
 
@@ -143,9 +143,6 @@ class TwitterBootstrapTest extends \PHPUnit_Framework_TestCase
     $this->assertEquals('<pre class="pre-scrollable"></pre>', (string)Tag::preScrollable());
   }
 
-  /**
-   * @todo Not implemented yet.
-   */
   public function testCSSTable()
   {
     $this->assertEquals('<table class="table"></table>', (string)Tag::table());
@@ -184,66 +181,103 @@ class TwitterBootstrapTest extends \PHPUnit_Framework_TestCase
     $this->assertEquals('<tr></tr>', (string)Tag::tableResponsive()->appendRow());
   }
 
-
   /**
    * @todo Not implemented yet.
    */
   public function testCSSForms()
   {
-    // Last implement a input search.
-    $this->assertEquals('<input type="text" class="form-control">',
-      (string)Tag::input());
-    $this->assertEquals('<input type="text" class="form-control">',
-      (string)Tag::input(null, null, null));
-    $this->assertEquals('<input type="text" class="form-control" name="record[name]" placeholder="text here" id="record_name">',
-      (string)Tag::input('record[name]', null, 'text here', array('id' => 'record_name')));
-    $this->assertEquals('<input type="text" class="form-control" name="record[name]" placeholder="text here" id="record_name" required>',
-      (string)Tag::inputRequired('record[name]', null, 'text here', array('id' => 'record_name')));
-    $this->assertEquals('<input type="hidden" name="record[csrf]" value="hogefuga">',
-      (string)Tag::inputHidden('record[csrf]', 'hogefuga'));
+    $this->assertEquals('<form role="form"></form>', (string)Tag::form());
+    $this->assertEquals('<div class="form-group"></div>', (string)Tag::formGroup());
+    $this->assertEquals('<div class="form-group"><label for="record_email" class="sr-only">Email address</label><input type="email" class="form-control" name="record[email]" placeholder="Enter email" id="record_email"></div>',
+      (string)Tag::formGroup('Email address', Tag::formEmail('record[email]', null, 'Enter email')->id('record_email'), true)
+    );
+    $this->assertEquals('<form class="form-inline" role="form"></form>', (string)Tag::formInline());
+    $this->assertInstanceOf('Primalbase\TwitterBootstrap\CSS\Forms', Tag::srOnly());
+    $this->assertEquals('<label class="sr-only" for="record_tel">Telephone number</label>', (string)Tag::srOnly('record_tel', 'Telephone number'));
+    $this->assertEquals('<form class="form-inline" role="form"><div class="form-group"><label class="sr-only" for="record_tel"></label></div></form>',
+      (string)Tag::formInline(Tag::formGroup()->append(Tag::srOnly('record_tel')))
+    );
+
+    // CSS/Form/Inline form
+
+    $this->assertEquals('<form class="form-inline" role="form"></form>', (string)Tag::formInline());
+
+    // Css/Form/Horizontal form
+
+    $this->assertEquals('<form class="form-horizontal" role="form"></form>', (string)Tag::formHorizontal());
+
+    // CSS/Forms/Supported controls/Inputs
+
+    // form text
+    $this->assertEquals('<input type="text" class="form-control">', (string)Tag::formText());
+    $this->assertEquals('<input type="text" class="form-control" name value placeholder>', (string)Tag::formText(false, false, false));
+    $this->assertEquals(
+      '<input type="text" class="form-control" name="record[name]" placeholder="text here" id="record_name">',
+      (string)Tag::formText('record[name]', null, 'text here', array('id' => 'record_name'))
+    );
+    $this->assertEquals(
+      '<input type="text" class="form-control" name="record[name]" placeholder="text here" id="record_name" required>',
+      (string)Tag::formTextRequired('record[name]', null, 'text here', array('id' => 'record_name'))
+    );
+    // form hidden
+    $this->assertEquals('<input type="hidden">', (string)Tag::formHidden());
+    $this->assertEquals(
+      '<input type="hidden" name="record[csrf]" value="hogefuga">',
+      (string)Tag::formHidden('record[csrf]', 'hogefuga')
+    );
+    // form search
+    $this->assertEquals('<input type="search" class="form-control">', (string)Tag::formSearch());
     $this->assertEquals('<input type="search" class="form-control" name="record[search]" placeholder="search now">',
-      (string)Tag::inputSearch('record[search]', null, 'search now'));
+      (string)Tag::formSearch('record[search]', null, 'search now'));
     $this->assertEquals('<input type="search" class="form-control" name="record[search]" placeholder="search now" required>',
-      (string)Tag::inputSearchRequired('record[search]', null, 'search now'));
-    $this->assertEquals('<input type="tel" class="form-control" name="record[tel]" placeholder="xxx-xxxx-xxxx">',
-      (string)Tag::inputTel('record[tel]', null, 'xxx-xxxx-xxxx'));
+      (string)Tag::formSearchRequired('record[search]', null, 'search now'));
+    // form tel
+    $this->assertEquals('<input type="tel" class="form-control">', (string)Tag::formTel());
+    $this->assertEquals(
+      '<input type="tel" class="form-control" name="record[tel]" placeholder="xxx-xxxx-xxxx">',
+      (string)Tag::formTel('record[tel]', null, 'xxx-xxxx-xxxx')
+    );
     $this->assertEquals('<input type="tel" class="form-control" name="record[tel]" placeholder="xxx-xxxx-xxxx" required>',
-      (string)Tag::inputTelRequired('record[tel]', null, 'xxx-xxxx-xxxx'));
-    $this->assertEquals('<input type="url" class="form-control" name="record[url]" placeholder="http://www.hoge.jp">',
-      (string)Tag::inputUrl('record[url]', null, 'http://www.hoge.jp'));
-    $this->assertEquals('<input type="url" class="form-control" required>',
-      (string)Tag::inputUrlRequired());
-    $this->assertEquals('<input type="email" class="form-control" name="record[email]" value="hoge@fuga.jp" placeholder="mail address here" id="record_email">',
-      (string)Tag::inputEmail('record[email]', 'hoge@fuga.jp', 'mail address here')->id('record_email'));
-    $this->assertEquals('<input type="email" class="form-control" required>',
-      (string)Tag::inputEmailRequired(null, null, null));
-    $this->assertEquals('<input type="password" class="form-control" name="record[password]" value="password" placeholder="password here">',
-      (string)Tag::inputPassword('record[password]', 'password', 'password here'));
-    $this->assertEquals('<input type="password" class="form-control" name="record[password]" value="password" placeholder="password here" required>',
-      (string)Tag::inputPasswordRequired('record[password]', 'password', 'password here'));
+      (string)Tag::formTelRequired('record[tel]', null, 'xxx-xxxx-xxxx'));
+    // form url
+    $this->assertEquals('<input type="url" class="form-control">', (string)Tag::formUrl());
+    $this->assertEquals(
+      '<input type="url" class="form-control" name="record[url]" placeholder="http://www.hoge.jp">',
+      (string)Tag::formUrl('record[url]', null, 'http://www.hoge.jp')
+    );
+    $this->assertEquals('<input type="url" class="form-control" required>', (string)Tag::formUrlRequired());
+    // form email
+    $this->assertEquals('<input type="email" class="form-control">', (string)Tag::formEmail());
+    $this->assertEquals(
+      '<input type="email" class="form-control" name="record[email]" value="hoge@fuga.jp" placeholder="mail address here" id="record_email">',
+      (string)Tag::formEmail('record[email]', 'hoge@fuga.jp', 'mail address here')->id('record_email'));
+    $this->assertEquals(
+      '<input type="email" class="form-control" required>',
+      (string)Tag::formEmailRequired()
+    );
+    // form password
+    $this->assertEquals('<input type="password" class="form-control">', (string)Tag::formPassword());
+    $this->assertEquals(
+      '<input type="password" class="form-control" name="record[password]" value="password" placeholder="password here">',
+      (string)Tag::formPassword('record[password]', 'password', 'password here')
+    );
+    $this->assertEquals(
+      '<input type="password" class="form-control" name="record[password]" value="password" placeholder="password here" required>',
+      (string)Tag::formPasswordRequired('record[password]', 'password', 'password here')
+    );
+
     $this->assertEquals('<input type="datetime" class="form-control">',
-      (string)Tag::inputDatetime());
+      (string)Tag::formDatetime());
     $this->assertEquals('<input type="datetime" class="form-control" name="record[datetime]" value="2013-11-07T22:55:00" min="1980-01-01T00:00:00" max="2045-12-31T23:59:59" step="300" required>',
-      (string)Tag::inputDatetimeRequired('record[datetime]', '2013-11-07T22:55:00', '1980-01-01T00:00:00', '2045-12-31T23:59:59', 300));
+      (string)Tag::formDatetimeRequired('record[datetime]', '2013-11-07T22:55:00', '1980-01-01T00:00:00', '2045-12-31T23:59:59', 300));
 
 
-
+    $this->assertInstanceOf('Primalbase\TwitterBootstrap\CSS\Forms', Tag::textarea());
     $this->assertEquals(
       '<textarea class="form-control" name="record[body]" cols="3" rows="9">'."body contents".'</textarea>',
       (string)Tag::textarea('record[body]', "body contents", null, array('cols' => 3, 'rows' => 9))
     );
 
-    $this->assertEquals('<div class="form-group"></div>', (string)Tag::formGroup());
-    $this->assertEquals('<div class="form-group"><label for="record_email">Email address</label><input type="email" class="form-control" id="record_email" name="record[email]" placeholder="Enter email"></div>',
-      (string)Tag::formGroup(array(
-        'type'        => 'email',
-        'id'          => 'record_email',
-        'name'        => 'record[email]',
-        'label'       => 'Email address',
-        'placeholder' => 'Enter email',
-      ))
-    );
-    $this->assertEquals('<form role="form"></form>', (string)Tag::form());
   }
 
   /**

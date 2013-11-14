@@ -7,12 +7,15 @@ use Primalbase\TwitterBootstrap\AbstractTagFactory;
 
 class Code extends AbstractTagFactory {
 
-  protected static $configurations = array(
-    'preScrollable' => array(
-      'tagName' => 'pre',
-      'attributes' => array(
-        'class' => 'pre-scrollable',
+  protected static function configurations()
+  {
+    return array(
+      'preScrollable' => array(
+        'tagName' => 'pre',
+        'attributes' => array(
+          'class' => 'pre-scrollable',
+        ),
       ),
-    ),
-  );
+    );
+  }
 } 

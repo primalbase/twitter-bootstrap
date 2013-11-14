@@ -6,38 +6,41 @@ use Primalbase\TwitterBootstrap\AbstractTagFactory;
 
 class Alerts extends AbstractTagFactory {
 
-  protected static $configurations = array(
-    'alertLink' => array(
-      'tagName' => 'a',
-      'attributes' => array(
-        'class' => 'alert-link',
+  protected static function configurations()
+  {
+    return array(
+      'alertLink' => array(
+        'tagName' => 'a',
+        'attributes' => array(
+          'class' => 'alert-link',
+        ),
+        'factory' => array(
+          'Primalbase\TwitterBootstrap\Components\Alerts',
+          'alertLinkFactory',
+        )
       ),
-      'factory' => array(
-        'Primalbase\TwitterBootstrap\Components\Alerts',
-        'alertLinkFactory',
-      )
-    ),
-    'alert' => array(
-      'attributes' => array(
-        'class' => 'alert',
+      'alert' => array(
+        'attributes' => array(
+          'class' => 'alert',
+        ),
+        'options' => array(
+          'Success'     => 'alert-success',
+          'Info'        => 'alert-info',
+          'Warning'     => 'alert-warning',
+          'Danger'      => 'alert-danger',
+          'Dismissable' => 'alert-dismissable',
+        ),
+        'factory'  => array(
+          'Primalbase\TwitterBootstrap\Components\Alerts',
+          'alertFactory',
+        ),
+        'callback' => array(
+          'Primalbase\TwitterBootstrap\Components\Alerts',
+          'alertCallback',
+        ),
       ),
-      'options' => array(
-        'Success'     => 'alert-success',
-        'Info'        => 'alert-info',
-        'Warning'     => 'alert-warning',
-        'Danger'      => 'alert-danger',
-        'Dismissable' => 'alert-dismissable',
-      ),
-      'factory'  => array(
-        'Primalbase\TwitterBootstrap\Components\Alerts',
-        'alertFactory',
-      ),
-      'callback' => array(
-        'Primalbase\TwitterBootstrap\Components\Alerts',
-        'alertCallback',
-      ),
-    ),
-  );
+    );
+  }
 
   public static function alertLinkFactory(array $config, array $args=array())
   {

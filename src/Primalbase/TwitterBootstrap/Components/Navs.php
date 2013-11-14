@@ -6,21 +6,24 @@ use Primalbase\TwitterBootstrap\AbstractTagFactory;
 
 class Navs extends AbstractTagFactory {
 
-  protected static $configurations = array(
-    'tabs' => array(
-      'tagName' => 'ul',
-      'attributes' => array(
-        'class' => 'nav nav-tabs'
+  protected static function configurations()
+  {
+    return array(
+      'tabs' => array(
+        'tagName' => 'ul',
+        'attributes' => array(
+          'class' => 'nav nav-tabs'
+        ),
+        'options' => array(
+          'Justfied' => 'nav-justified'
+        ),
+        'factory' => array(
+          'Primalbase\TwitterBootstrap\Components\Navs',
+          'tabsFactory',
+        )
       ),
-      'options' => array(
-        'Justfied' => 'nav-justified'
-      ),
-      'factory' => array(
-        'Primalbase\TwitterBootstrap\Components\Navs',
-        'tabsFactory',
-      )
-    ),
-  );
+    );
+  }
 
   public static function tabsFactory($config, $args)
   {

@@ -29,42 +29,42 @@ use Primalbase\TwitterBootstrap\AbstractTagFactory;
  */
 class GridSystem extends AbstractTagFactory {
 
-  // 'aaa'    => 'aaa'     -> Tag::aaa()    -> <div class="aaa"></div>
-  // 'aaaBbb' => 'aaa-bbb' -> Tag::aaaBbb() -> <div class="aaa-bbb"></div>
-  // 優先順位降順、前方マッチで検索する(重複してマッチするタグは後回しにする)
-  protected static $configurations = array(
-    'row' => 'row',
-    'colLg' => array(
-      'factory' => array(
-        __CLASS__,
-        'colLgFactory',
+  protected static function configurations()
+  {
+    return array(
+      'row' => 'row',
+      'colLg' => array(
+        'factory' => array(
+          __CLASS__,
+          'colLgFactory',
+        ),
       ),
-    ),
-    'colMd' => array(
-      'factory' => array(
-        __CLASS__,
-        'colMdFactory',
+      'colMd' => array(
+        'factory' => array(
+          __CLASS__,
+          'colMdFactory',
+        ),
       ),
-    ),
-    'colSm' => array(
-      'factory' => array(
-        __CLASS__,
-        'colSmFactory',
+      'colSm' => array(
+        'factory' => array(
+          __CLASS__,
+          'colSmFactory',
+        ),
       ),
-    ),
-    'colXs' => array(
-      'factory' => array(
-        __CLASS__,
-        'colXsFactory',
+      'colXs' => array(
+        'factory' => array(
+          __CLASS__,
+          'colXsFactory',
+        ),
       ),
-    ),
-    'col' => array(
-      'factory' => array(
-        __CLASS__,
-        'colXsFactory',
-      ),
-    )
-  );
+      'col' => array(
+        'factory' => array(
+          __CLASS__,
+          'colXsFactory',
+        ),
+      )
+    );
+  }
 
   protected static function abstractColFactory($prefix, array $config, array $args)
   {

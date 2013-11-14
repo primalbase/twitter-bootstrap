@@ -3,35 +3,37 @@ namespace Primalbase\TwitterBootstrap\CSS;
 
 use Primalbase\TwitterBootstrap\AbstractTagFactory;
 use Primalbase\TwitterBootstrap\CSS\Table\Row;
+use Primalbase\TwitterBootstrap\TwitterBootstrap;
 
 class Table extends AbstractTagFactory {
 
-  protected $activeElement = null;
-
-  protected static $configurations = array(
-    'tableResponsive' => array(
-      'tagName' => 'div',
-      'attributes' => array(
-        'class' => 'table-responsive',
+  public static function configurations()
+  {
+    return array(
+      'tableResponsive' => array(
+        'tagName' => 'div',
+        'attributes' => array(
+          'class' => 'table-responsive',
+        ),
+        'factory' => array(
+          __CLASS__,
+          'tableResponsiveFactory',
+        )
       ),
-      'factory' => array(
-        __CLASS__,
-        'tableResponsiveFactory',
-      )
-    ),
-    'table' => array(
-      'tagName' => 'table',
-      'attributes' => array(
-        'class' => 'table',
+      'table' => array(
+        'tagName' => 'table',
+        'attributes' => array(
+          'class' => 'table',
+        ),
+        'options' => array(
+          'Striped'   => 'table-striped',
+          'Bordered'  => 'table-bordered',
+          'Hover'     => 'table-hover',
+          'Condensed' => 'table-condensed',
+        )
       ),
-      'options' => array(
-        'Striped'   => 'table-striped',
-        'Bordered'  => 'table-bordered',
-        'Hover'     => 'table-hover',
-        'Condensed' => 'table-condensed',
-      )
-    ),
-  );
+    );
+  }
 
   public static function tableResponsiveFactory(array $config, array $args)
   {
@@ -48,7 +50,7 @@ class Table extends AbstractTagFactory {
     foreach (array_slice($args, 2) as $arg)
       $tag->append($arg);
 
-    $tag->activeElement = static::table();
+    $tag->activeElement = TwitterBootstrap::table();
     $tag->append($tag->activeElement);
 
     return $tag;

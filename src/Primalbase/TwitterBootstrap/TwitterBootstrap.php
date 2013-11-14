@@ -23,9 +23,6 @@
 namespace Primalbase\TwitterBootstrap;
 
 use Primalbase\Tag\Tag;
-use Primalbase\TwitterBootstrap\CSS;
-use Primalbase\TwitterBootstrap\CSS\Typography;
-use Primalbase\TwitterBootstrap\CSS\Table;
 
 /**
  * Class TwitterBootstrap
@@ -33,9 +30,9 @@ use Primalbase\TwitterBootstrap\CSS\Table;
  *
  * CSS
  *
- * @method static \Primalbase\TwitterBootstrap\CSS html(\string $lang = "en", \mixed $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS html(\string $lang = 'en', \mixed $options = null)
  * @method static \Primalbase\TwitterBootstrap\CSS viewport(\Boolean $user_scalable = null, \string $minimum_scale = null, \string $maximum_scale = null, \mixed $options = null)
- * @method static \Primalbase\TwitterBootstrap\CSS imgResponsive(\string $src = "#", \string $alt = "", \mixed $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS imgResponsive(\string $src = '#', \string $alt = '', \mixed $options = null)
  * @method static \Primalbase\TwitterBootstrap\CSS container(\mixed $options = null)
  *
  * CSS/Grid system
@@ -66,7 +63,6 @@ use Primalbase\TwitterBootstrap\CSS\Table;
  * @method static \Primalbase\TwitterBootstrap\CSS\Code preScrollable(\mixed $options = null)
  *
  * CSS/Table
- *
  * @method static \Primalbase\TwitterBootstrap\CSS\Table table(\mixed $options = null)
  * @method static \Primalbase\TwitterBootstrap\CSS\Table tableStriped(\mixed $options = null)
  * @method static \Primalbase\TwitterBootstrap\CSS\Table tableBordered(\mixed $options = null)
@@ -97,69 +93,56 @@ use Primalbase\TwitterBootstrap\CSS\Table;
  *
  * CSS/Forms
  *
- * @method static \Primalbase\TwitterBootstrap\CSS\Forms formControl()
- * @method static \Primalbase\TwitterBootstrap\CSS\Forms formGroup(\mixed $options)
- * @method static \Primalbase\TwitterBootstrap\CSS\Forms form(\mixed $options)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Forms form(\mixed $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Forms formGroup(\string $label = null, Forms $form_element = null, \boolean $sr_only = false, \mixed $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Forms formInline(\mixed $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Forms srOnly(\string $for = null)
  *
- * CSS/Forms/Inline form
+ * CSS/Form/Inline form
  *
- * @todo CSS/Forms/Inline form isn't implemented yet.
- * @todo CSS/Forms/Inline form isn't tested yet.
+ * @method static \Primalbase\TwitterBootstrap\CSS\Forms formHorizontal()
  *
- * @method static TwitterBootstrap formInline()
- * @method static TwitterBootstrap srOnly(\string $for)
+ * Css/Form/Horizontal form
  *
- * CSS/Forms/Horizontal form
- *
- * @todo CSS/Forms/Horizontal form isn't implemented yet.
- * @todo CSS/Forms/Horizontal form isn't tested yet.
- *
- * @method static TwitterBootstrap formHorizontal()
- * @method static TwitterBootstrap controlLabel()
+ * @method static \Primalbase\TwitterBootstrap\CSS\Forms controlLabel()
  *
  * CSS/Forms/Supported controls/Inputs
  *
  * @todo CSS/Forms/Supported controls/Inputs isn't implemented yet.
  * @todo CSS/Forms/Supported controls/Inputs isn't tested yet.
  *
- * @method static TwitterBootstrap formText(\string $name, \string $value, \string $placeholder, array $options) CSS\Forms
- * @method static TwitterBootstrap formTextRequired(\string $name, \string $value, \string $placeholder, array $options) CSS\Forms
- * @method static TwitterBootstrap formHidden(\string $name, \string $value, array $options) CSS\Forms
- * @method static TwitterBootstrap formSearch(\string $name, \string $value, array $options) CSS\Forms
- * @method static TwitterBootstrap formSearchRequired(\string $name, \string $value, array $options) CSS\Forms
- * @method static TwitterBootstrap formTel(\string $name, \string $value, \string $placeholder, array $options) CSS\Forms
- * @method static TwitterBootstrap formTelRequired(\string $name, \string $value, \string $placeholder, array $options) CSS\Forms
- * @method static TwitterBootstrap formUrl(\string $name, \string $value, \string $placeholder, array $options) CSS\Forms
- * @method static TwitterBootstrap formUrlRequired(\string $name, \string $value, \string $placeholder, array $options) CSS\Forms
- * @method static TwitterBootstrap formEmail(\string $name, \string $value, \string $placeholder, array $options) CSS\Forms
- * @method static TwitterBootstrap formEmailRequired(\string $name, \string $value, \string $placeholder, array $options) CSS\Forms
- * @method static TwitterBootstrap formPassword(\string $name, \string $value, \string $placeholder, array $options) CSS\Forms
- * @method static TwitterBootstrap formPasswordRequired(\string $name, \string $value, \string $placeholder, array $options) CSS\Forms
- * @method static TwitterBootstrap formDatetime(\string $name, \string $value, \integer $min, \integer $max, \integer $step, array $options) CSS\Forms
- * @method static TwitterBootstrap formDatetimeRequired(\string $name, \string $value, \integer $min, \integer $max, \integer $step, array $options) CSS\Forms
- * @method static TwitterBootstrap formDate(\string $name, \string $value, \integer $min, \integer $max, \integer $step, array $options) CSS\Forms
- * @method static TwitterBootstrap formDateRequired(\string $name, \string $value, \integer $min, \integer $max, \integer $step, array $options) CSS\Forms
- * @method static TwitterBootstrap formMonth(\string $name, \string $value, \integer $min, \integer $max, \integer $step, array $options) CSS\Forms
- * @method static TwitterBootstrap formMonthRequired(\string $name, \string $value, \integer $min, \integer $max, \integer $step, array $options) CSS\Forms
- * @method static TwitterBootstrap formWeek(\string $name, \string $value, \integer $min, \integer $max, \integer $step, array $options) CSS\Forms
- * @method static TwitterBootstrap formWeekRequired(\string $name, \string $value, \integer $min, \integer $max, \integer $step, array $options) CSS\Forms
- * @method static TwitterBootstrap formTime(\string $name, \string $value, \integer $min, \integer $max, \integer $step, array $options) CSS\Forms
- * @method static TwitterBootstrap formTimeRequired(\string $name, \string $value, \integer $min, \integer $max, \integer $step, array $options) CSS\Forms
- * @method static TwitterBootstrap formDatetimeLocal(\string $name, \string $value, \integer $min, \integer $max, \integer $step, array $options) CSS\Forms
- * @method static TwitterBootstrap formDatetimeLocalRequired(\string $name, \string $value, \integer $min, \integer $max, \integer $step, array $options) CSS\Forms
- * @method static TwitterBootstrap formNumber(\string $name, \string $value, \integer $min, \integer $max, \integer $step, array $options) CSS\Forms
- * @method static TwitterBootstrap formNumberRequired(\string $name, \string $value, \integer $min, \integer $max, \integer $step, array $options) CSS\Forms
- * @method static TwitterBootstrap formRange(\string $name, \string $value, \integer $min, \integer $max, \integer $step, array $options) CSS\Forms
- * @method static TwitterBootstrap formRangeRequired(\string $name, \string $value, \integer $min, \integer $max, \integer $step, array $options) CSS\Forms
- * @method static TwitterBootstrap formColor(\string $name, \string $value, array $options) CSS\Forms
- * @method static TwitterBootstrap formColorRequired(\string $name, \string $value, array $options) CSS\Forms
- *
- * Css/Forms/Supported controls/Textarea
- *
- * @todo Css/Forms/Supported controls/Textarea isn't tested yet.
- * @todo Css/Forms/Supported controls/Textarea isn't implemented yet.
- *
- * @method static TwitterBootstrap textarea(\string $name, \string $value, \string $placeholder, array $options) CSS\Forms
+ * @method static \Primalbase\TwitterBootstrap\CSS\Forms formText(\string $name = null, \string $value = null, \string $placeholder = null, array $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Forms formTextRequired(\string $name = null, \string $value = null, \string $placeholder = null, array $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Forms formHidden(\string $name = null, \string $value = null, array $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Forms formSearch(\string $name = null, \string $value = null, array $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Forms formSearchRequired(\string $name = null, \string $value = null, array $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Forms formTel(\string $name = null, \string $value = null, \string $placeholder = null, array $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Forms formTelRequired(\string $name = null, \string $value = null, \string $placeholder = null, array $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Forms formUrl(\string $name = null, \string $value = null, \string $placeholder = null, array $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Forms formUrlRequired(\string $name = null, \string $value = null, \string $placeholder = null, array $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Forms formEmail(\string $name = null, \string $value = null, \string $placeholder = null, array $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Forms formEmailRequired(\string $name = null, \string $value = null, \string $placeholder = null, array $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Forms formPassword(\string $name = null, \string $value = null, \string $placeholder = null, array $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Forms formPasswordRequired(\string $name = null, \string $value = null, \string $placeholder = null, array $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Forms formDatetime(\string $name = null, \string $value = null, \integer $min = null, \integer $max = null, \integer $step = null, array $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Forms formDatetimeRequired(\string $name = null, \string $value = null, \integer $min = null, \integer $max = null, \integer $step = null, array $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Forms formDate(\string $name = null, \string $value = null, \integer $min = null, \integer $max = null, \integer $step = null, array $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Forms formDateRequired(\string $name = null, \string $value = null, \integer $min = null, \integer $max = null, \integer $step = null, array $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Forms formMonth(\string $name = null, \string $value = null, \integer $min = null, \integer $max = null, \integer $step = null, array $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Forms formMonthRequired(\string $name = null, \string $value = null, \integer $min = null, \integer $max = null, \integer $step = null, array $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Forms formWeek(\string $name = null, \string $value = null, \integer $min = null, \integer $max = null, \integer $step = null, array $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Forms formWeekRequired(\string $name = null, \string $value = null, \integer $min = null, \integer $max = null, \integer $step = null, array $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Forms formTime(\string $name = null, \string $value = null, \integer $min = null, \integer $max = null, \integer $step = null, array $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Forms formTimeRequired(\string $name = null, \string $value = null, \integer $min = null, \integer $max = null, \integer $step = null, array $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Forms formDatetimeLocal(\string $name = null, \string $value = null, \integer $min = null, \integer $max = null, \integer $step = null, array $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Forms formDatetimeLocalRequired(\string $name = null, \string $value = null, \integer $min = null, \integer $max = null, \integer $step = null, array $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Forms formNumber(\string $name = null, \string $value = null, \integer $min = null, \integer $max = null, \integer $step = null, array $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Forms formNumberRequired(\string $name = null, \string $value = null, \integer $min = null, \integer $max = null, \integer $step = null, array $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Forms formRange(\string $name = null, \string $value = null, \integer $min = null, \integer $max = null, \integer $step = null, array $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Forms formRangeRequired(\string $name = null, \string $value = null, \integer $min = null, \integer $max = null, \integer $step = null, array $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Forms formColor(\string $name = null, \string $value = null, array $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Forms formColorRequired(\string $name = null, \string $value = null, array $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Forms textarea(\string $name = null, \string $value = null, \string $placeholder = null, array $options = null)
  *
  * Css/Forms/Supported controls/Checkboxes and radios
  *
@@ -250,7 +233,12 @@ class TwitterBootstrap extends Tag
 
     foreach (static::$configurationsAll as $config)
     {
-      if (strpos($tagName, $config['name']) === 0)
+      if ($config['regexp'])
+      {
+        if (preg_match($config['regexp'], $tagName))
+          return $config['class']::build($tagName, $config, $args);
+      }
+      elseif (strpos($tagName, $config['name']) === 0)
         return $config['class']::build($tagName, $config, $args);
     }
 
