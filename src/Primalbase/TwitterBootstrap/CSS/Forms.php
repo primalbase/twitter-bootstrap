@@ -25,12 +25,12 @@ class Forms extends AbstractTagFactory {
           'value' => '@2',
         ),
       ),
-      'formTimes' => array(
+      'formNumbers' => array(
         'prefix'  => 'form',
-        'regexp'  => '(Date|Datetime|Month|Week|Time|DatetimeLocal)',
+        'regexp'  => '(DatetimeLocal|Datetime|Date|Month|Week|Time|Number|Range)',
         'tagName' => 'input',
         'attributes' => array(
-          'type'  => null,
+          'type',
           'class' => 'form-control',
           'name'  => '@1',
           'value' => '@2',
@@ -39,12 +39,14 @@ class Forms extends AbstractTagFactory {
           'step'  => '@5',
         ),
         'options' => array(
+          'DatetimeLocal' => array('type' => 'datetime-local'),
           'Datetime' => array('type' => 'datetime'),
           'Date'     => array('type' => 'date'),
           'Month'    => array('type' => 'month'),
-          'Week'     => array('type' => 'week'),
           'Time'     => array('type' => 'time'),
-          'DatetimeLocal' => array('type' => 'datetime-local'),
+          'Week'     => array('type' => 'week'),
+          'Number'   => array('type' => 'number'),
+          'Range'    => array('type' => 'range', 'class' => null), // not supported by twitter bootstrap.
           'Required' => array('required' => false),
         ),
       ),
@@ -87,6 +89,19 @@ class Forms extends AbstractTagFactory {
           'Tel'      => array('type' => 'tel'),
           'Url'      => array('type' => 'url'),
           'Password' => array('type' => 'password'),
+          'Required' => array('required' => false),
+        ),
+      ),
+      // color hasn't placeholder
+      'formColor' => array(
+        'tagName' => 'input',
+        'attributes' => array(
+          'type'  => 'color',
+          'class' => 'form-control',
+          'name'  => '@1',
+          'value' => '@2',
+        ),
+        'options' => array(
           'Required' => array('required' => false),
         ),
       ),

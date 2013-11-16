@@ -275,6 +275,16 @@ class TwitterBootstrapTest extends \PHPUnit_Framework_TestCase
       '<input type="datetime" class="form-control" name="record[datetime]" value="2013-11-07T22:55:00" min="1980-01-01T00:00:00" max="2045-12-31T23:59:59" step="300" required>',
       (string)Tag::formDatetimeRequired('record[datetime]', '2013-11-07T22:55:00', '1980-01-01T00:00:00', '2045-12-31T23:59:59', 300)
     );
+    // form datetime-local
+    $this->assertEquals('<input type="datetime-local" class="form-control">', (string)Tag::formDatetimeLocal());
+    $this->assertEquals(
+      '<input type="datetime-local" class="form-control" name="record[datetime-local]" value="2013-11-07T22:55:00" min="1980-01-01T00:00:00" max="2045-12-31T23:59:59" step="300">',
+      (string)Tag::formDatetimeLocal('record[datetime-local]', '2013-11-07T22:55:00', '1980-01-01T00:00:00', '2045-12-31T23:59:59', 300)
+    );
+    $this->assertEquals(
+      '<input type="datetime-local" class="form-control" name="record[datetime-local]" value="2013-11-07T22:55:00" min="1980-01-01T00:00:00" max="2045-12-31T23:59:59" step="300" required>',
+      (string)Tag::formDatetimeLocalRequired('record[datetime-local]', '2013-11-07T22:55:00', '1980-01-01T00:00:00', '2045-12-31T23:59:59', 300)
+    );
     // form date
     $this->assertEquals('<input type="date" class="form-control">', (string)Tag::formDate());
     $this->assertEquals(
@@ -283,7 +293,70 @@ class TwitterBootstrapTest extends \PHPUnit_Framework_TestCase
     );
     $this->assertEquals(
       '<input type="date" class="form-control" name="record[date]" value="2013-11-07" min="1980-01-01" max="2045-12-31" step="1" required>',
-      (string)Tag::formDatetimeRequired('record[date]', '2013-11-07', '1980-01-01', '2045-12-31', 1)
+      (string)Tag::formDateRequired('record[date]', '2013-11-07', '1980-01-01', '2045-12-31', 1)
+    );
+    // form month
+    $this->assertEquals('<input type="month" class="form-control">', (string)Tag::formMonth());
+    $this->assertEquals(
+      '<input type="month" class="form-control" name="record[month]" value="2013-11" min="1980-01" max="2045-12" step="1">',
+      (string)Tag::formMonth('record[month]', '2013-11', '1980-01', '2045-12', 1)
+    );
+    $this->assertEquals(
+      '<input type="month" class="form-control" name="record[month]" value="2013-11" min="1980-01" max="2045-12" step="1" required>',
+      (string)Tag::formMonthRequired('record[month]', '2013-11', '1980-01', '2045-12', 1)
+    );
+    // form week
+    $this->assertEquals('<input type="week" class="form-control">', (string)Tag::formWeek());
+    $this->assertEquals(
+      '<input type="week" class="form-control" name="record[week]" value="2013W11" min="1980W01" max="2045W12" step="1">',
+      (string)Tag::formWeek('record[week]', '2013W11', '1980W01', '2045W12', 1)
+    );
+    $this->assertEquals(
+      '<input type="week" class="form-control" name="record[week]" value="2013W11" min="1980W01" max="2045W12" step="1" required>',
+      (string)Tag::formWeekRequired('record[week]', '2013W11', '1980W01', '2045W12', 1)
+    );
+    // form time
+    $this->assertEquals('<input type="time" class="form-control">', (string)Tag::formTime());
+    $this->assertEquals(
+      '<input type="time" class="form-control" name="record[time]" value="12:00:00" min="00:00:00" max="23:59:59" step="1">',
+      (string)Tag::formTime('record[time]', '12:00:00', '00:00:00', '23:59:59', 1)
+    );
+    $this->assertEquals(
+      '<input type="time" class="form-control" name="record[time]" value="12:00:00" min="00:00:00" max="23:59:59" step="1" required>',
+      (string)Tag::formTimeRequired('record[time]', '12:00:00', '00:00:00', '23:59:59', 1)
+    );
+
+    // form number
+    $this->assertEquals('<input type="number" class="form-control">', (string)Tag::formNumber());
+    $this->assertEquals(
+      '<input type="number" class="form-control" name="record[number]" value="50" min="0" max="100" step="any">',
+      (string)Tag::formNumber('record[number]', '50', '0', '100', 'any')
+    );
+    $this->assertEquals(
+      '<input type="number" class="form-control" name="record[number]" value="50" min="0" max="100" step="any" required>',
+      (string)Tag::formNumberRequired('record[number]', '50', '0', '100', 'any')
+    );
+
+    // form range
+    $this->assertEquals('<input type="range">', (string)Tag::formRange());
+    $this->assertEquals(
+      '<input type="range" name="record[range]" value="50" min="0" max="100" step="any" data-range="50">',
+      (string)Tag::formRange('record[range]', '50', '0', '100', 'any', array('data-range' => '50'))
+    );
+    $this->assertEquals(
+      '<input type="range" name="record[range]" value="50" min="0" max="100" step="any" required>',
+      (string)Tag::formRangeRequired('record[range]', '50', '0', '100', 'any')
+    );
+
+    // form color
+    $this->assertEquals('<input type="color" class="form-control">', (string)Tag::formColor());
+    $this->assertEquals(
+      '<input type="color" class="form-control" name="record[color]" value="#000000" data-color="#FFFFFF">',
+      (string)Tag::formColor('record[color]', '#000000', array('data-color' => '#FFFFFF'))
+    );
+    $this->assertEquals(
+      '<input type="color" class="form-control" name="record[color]" value="#000000" required>',
+      (string)Tag::formColorRequired('record[color]', '#000000')
     );
 
     $this->assertInstanceOf('Primalbase\TwitterBootstrap\CSS\Forms', Tag::textarea());
