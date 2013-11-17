@@ -187,9 +187,17 @@ class TwitterBootstrapTest extends \PHPUnit_Framework_TestCase
   public function testCSSForms()
   {
     $this->assertEquals('<form role="form"></form>', (string)Tag::form());
+
     $this->assertEquals('<div class="form-group"></div>', (string)Tag::formGroup());
-    $this->assertEquals('<div class="form-group"><label for="record_email" class="sr-only">Email address</label><input type="email" class="form-control" name="record[email]" placeholder="Enter email" id="record_email"></div>',
-      (string)Tag::formGroup('Email address', Tag::formEmail('record[email]', null, 'Enter email')->id('record_email'), true)
+    $this->assertEquals(
+      '<div class="form-group">'.
+        '<label for="record_email">Email address</label>'.
+        '<input type="email" class="form-control" name="record[email]" placeholder="Enter email" id="record_email">'.
+      '</div>',
+      (string)Tag::formGroup(
+        Tag::label('Email address')->for('record_email'),
+        Tag::formEmail('record[email]', null, 'Enter email')->id('record_email')
+      )
     );
     $this->assertEquals('<form class="form-inline" role="form"></form>', (string)Tag::formInline());
     $this->assertInstanceOf('Primalbase\TwitterBootstrap\CSS\Forms', Tag::srOnly());
@@ -201,16 +209,38 @@ class TwitterBootstrapTest extends \PHPUnit_Framework_TestCase
     // CSS/Form/Inline form
 
     $this->assertEquals('<form class="form-inline" role="form"></form>', (string)Tag::formInline());
+    $this->assertEquals(
+     '<div class="form-group">'.
+     '<label class="sr-only" for="exampleInputEmail2">Email address</label>'.
+     '<input type="email" class="form-control" placeholder="Enter email" id="exampleInputEmail2">'.
+     '</div>',
+      (string)Tag::formGroup(
+        Tag::srOnly('exampleInputEmail2', 'Email address'),
+        Tag::formEmail(null,null, 'Enter email')->id('exampleInputEmail2')
+      )
+    );
 
     // Css/Form/Horizontal form
 
     $this->assertEquals('<form class="form-horizontal" role="form"></form>', (string)Tag::formHorizontal());
+    $this->assertEquals(
+      '<div class="form-group">'.
+      '<label class="control-label col-sm-2">Email</label>'.
+      '<div class="col-sm-10">'.
+      '<input type="email" class="form-control" placeholder="Email" id="inputEmail3">'.
+      '</div>'.
+      '</div>',
+      (string)Tag::formGroup(
+        Tag::controlLabel('Email')->sm(2),
+        Tag::colSm(10, Tag::formEmail(null, null, 'Email')->id('inputEmail3'))
+      )
+    );
 
     // CSS/Forms/Supported controls/Inputs
 
     // form text
     $this->assertEquals('<input type="text" class="form-control">', (string)Tag::formText());
-    $this->assertEquals('<input type="text" class="form-control" name value placeholder>', (string)Tag::formText(false, false, false));
+    $this->assertEquals('<input type="text" class="form-control" name value placeholder>', (string)Tag::formText(true, true, true));
     $this->assertEquals(
       '<input type="text" class="form-control" name="record[name]" placeholder="text here" id="record_name">',
       (string)Tag::formText('record[name]', null, 'text here', array('id' => 'record_name'))
@@ -359,12 +389,51 @@ class TwitterBootstrapTest extends \PHPUnit_Framework_TestCase
       (string)Tag::formColorRequired('record[color]', '#000000')
     );
 
-    $this->assertInstanceOf('Primalbase\TwitterBootstrap\CSS\Forms', Tag::textarea());
+    // textarea
+    $this->assertInstanceOf('Primalbase\TwitterBootstrap\CSS\Forms', Tag::formTextarea());
+    $this->assertEquals('<textarea class="form-control"></textarea>', (string)Tag::formTextarea());
     $this->assertEquals(
-      '<textarea class="form-control" name="record[body]" cols="3" rows="9">'."body contents".'</textarea>',
-      (string)Tag::textarea('record[body]', "body contents", null, array('cols' => 3, 'rows' => 9))
+      '<textarea class="form-control" name="record[body]" rows="3">'.
+        'body contents'.
+      '</textarea>',
+      (string)Tag::formTextarea('record[body]', 3, 'body contents', null)
+    );
+    $this->assertEquals(
+      '<textarea class="form-control" name="record[body]" rows="9" placeholder="body contents here" required>'.
+        'body contents'.
+      '</textarea>',
+      (string)Tag::formTextareaRequired('record[body]', 9, 'body contents', 'body contents here')
     );
 
+    // checkboxes and radios
+
+    // default(stacked)
+    $this->assertEquals(
+      '<div class="checkbox">'.
+        '<label>'.
+          '<input type="checkbox" value="">'.
+          'Option one is this and that&#039;be sure to include why it&#039;s great'.
+        '</label>'.
+      '</div>',
+      (string)Tag::checkbox(
+        Tag::formCheckbox(null, ''),
+        'Option one is this and that\'be sure to include why it\'s great'
+      )
+    );
+    $this->assertEquals(
+      '<div class="radio">'.
+        '<label>'.
+          '<input type="radio" name="optionsRadios" value="option1" checked id="optionsRadios1">'.
+          'Option one is this and that&#039;be sure to include why it&#039;s great'.
+        '</label>'.
+      '</div>',
+      (string)Tag::radio(
+        Tag::formRadio('optionsRadios', 'option1', true)->id('optionsRadios1'),
+        'Option one is this and that\'be sure to include why it\'s great'
+      )
+    );
+
+    // @todo checkboxes and radios and others.
   }
 
   /**

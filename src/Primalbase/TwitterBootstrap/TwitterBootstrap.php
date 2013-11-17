@@ -1,25 +1,4 @@
 <?php
-/**
- *  Bootstrap 3 のタグを出力
- *
- * How to use
- *
- * use TwitterBootstrap as Tag;
- *
- * Tag::row()
- * -> <div class="row"></div>
- *
- * Tag::span{n}()
- * gridSpan(n))のエイリアス
- * -> <div class="span{n}"></div>
- *
- * Created by JetBrains PhpStorm.
- * User: hiroshi_kawai
- * Date: 13/10/10
- * Time: 15:40
- * To change this template use File | Settings | File Templates.
- */
-
 namespace Primalbase\TwitterBootstrap;
 
 use Primalbase\Tag\Tag;
@@ -96,15 +75,15 @@ use Primalbase\Tag\Tag;
  * @method static \Primalbase\TwitterBootstrap\CSS\Forms form(\mixed $options = null)
  * @method static \Primalbase\TwitterBootstrap\CSS\Forms formGroup(\string $label = null, Forms $form_element = null, \boolean $sr_only = false, \mixed $options = null)
  * @method static \Primalbase\TwitterBootstrap\CSS\Forms formInline(\mixed $options = null)
- * @method static \Primalbase\TwitterBootstrap\CSS\Forms srOnly(\string $for = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Forms srOnly(\string $for = null, \mixed $options)
  *
  * CSS/Form/Inline form
  *
- * @method static \Primalbase\TwitterBootstrap\CSS\Forms formHorizontal()
+ * @method static \Primalbase\TwitterBootstrap\CSS\Forms formHorizontal(\mixed $options = null)
  *
  * Css/Form/Horizontal form
  *
- * @method static \Primalbase\TwitterBootstrap\CSS\Forms controlLabel()
+ * @method static \Primalbase\TwitterBootstrap\CSS\Forms controlLabel(\mixed $options = null)
  *
  * CSS/Forms/Supported controls/Inputs
  *
@@ -139,7 +118,8 @@ use Primalbase\Tag\Tag;
  * @method static \Primalbase\TwitterBootstrap\CSS\Forms formRangeRequired(\string $name = null, \string $value = null, \integer $min = null, \integer $max = null, \mixed $step = null, array $options = null)
  * @method static \Primalbase\TwitterBootstrap\CSS\Forms formColor(\string $name = null, \string $value = null, array $options = null)
  * @method static \Primalbase\TwitterBootstrap\CSS\Forms formColorRequired(\string $name = null, \string $value = null, array $options = null)
- * @method static \Primalbase\TwitterBootstrap\CSS\Forms textarea(\string $name = null, \string $value = null, \string $placeholder = null, array $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Forms formTextarea(\string $name = null, \Integer $rows = null, \string $value = null, \string $placeholder = null, array $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Forms formTextareaRequired(\string $name = null, \Integer $rows = null, \string $value = null, \string $placeholder = null, array $options = null)
  *
  * Css/Forms/Supported controls/Checkboxes and radios
  *
@@ -221,9 +201,15 @@ class TwitterBootstrap extends Tag
     {
       foreach (static::$library as $lib)
       {
+        $configurations = $lib::getFormatConfigurations();
+        foreach ($configurations as $config)
+          foreach(static::$configurationsAll as $_config)
+            if ($config['prefix'] == $_config['prefix'])
+              trigger_error('Duplicate configuration key. "'.$config['prefix']."'", E_USER_WARNING);
+
         static::$configurationsAll = array_merge(
           static::$configurationsAll,
-          $lib::getFormatConfigurations()
+          $configurations
         );
       }
     }

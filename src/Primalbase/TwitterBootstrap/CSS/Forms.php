@@ -1,15 +1,26 @@
 <?php
 namespace Primalbase\TwitterBootstrap\CSS;
 
-use Primalbase\TwitterBootstrap\TwitterBootstrap as Tag;
 use Primalbase\TwitterBootstrap\AbstractTagFactory;
 
-class Forms extends AbstractTagFactory {
-
+/**
+ * Class Forms
+ * @package Primalbase\TwitterBootstrap\CSS
+ *
+ * control-label use cols.
+ * @example <label class="control-label col-sm-2">
+ */
+class Forms extends GridSystem {
 
   protected static function configurations()
   {
     return array(
+      'controlLabel' => array(
+        'tagName' => 'label',
+        'attributes' => array(
+          'class'   => 'control-label',
+        ),
+      ),
       'srOnly'     => array(
         'tagName' => 'label',
         'attributes' => array(
@@ -47,26 +58,100 @@ class Forms extends AbstractTagFactory {
           'Week'     => array('type' => 'week'),
           'Number'   => array('type' => 'number'),
           'Range'    => array('type' => 'range', 'class' => null), // not supported by twitter bootstrap.
-          'Required' => array('required' => false),
+          'Required' => array('required' => true),
         ),
       ),
-      'textarea' => array(
+      'formTextarea' => array(
         'tagName'    => 'textarea',
         'attributes' => array(
-          'class' => 'form-control',
+          'class'       => 'form-control',
+          'name'        => '@1',
+          'rows'        => '@2',
+          // @3 is append to body by default behavior.
+          'placeholder' => '@4',
+        ),
+        'options' => array(
+          'Required' => array('required' => true),
+        ),
+      ),
+      /**
+       * Default (stacked)
+       * <code>
+       * <div class="checkbox">
+       *   <label>
+       *     <input type="checkbox" value="">
+       *     Option one is this and that&mdash;be sure to include why it's great
+       *   </label>
+       * </div>
+       * </code>
+       */
+      'checkbox' => array(
+        'tagName' => 'div',
+        'attributes' => array(
+          'class' => 'checkbox',
         ),
         'factory' => array(
           __CLASS__,
-          'textareaFactory',
+          'checkboxFactory',
         ),
       ),
+      'radio' => array(
+        'tagName' => 'div',
+        'attributes' => array(
+          'class' => 'radio',
+        ),
+        'factory' => array(
+          __CLASS__,
+          'checkboxFactory',
+        ),
+      ),
+
+      'formCheckBoxAndRadio' => array(
+        'prefix'  => 'form',
+        'regexp'  => '(Checkbox|Radio)',
+        'tagName' => 'input',
+        'attributes' => array(
+          'type' => null,
+          'name'    => '@1',
+          'value'   => '@2',
+          'checked' => '@3'
+        ),
+        'options' => array(
+          'Checkbox' => array('type' => 'checkbox'),
+          'Radio'    => array('type' => 'radio'),
+        )
+      ),
+
+      /**
+       * Basic example.
+       * <code>
+       * <div class="form-group">
+       *   <label for="exampleInputEmail1">Email</label>
+       *   <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+       * </div>
+       * </code>
+       *
+       * Inline form.
+       * <code>
+       * <div class="form-group">
+       *   <label class="sr-only" for="exampleInputEmail2">Email address</label>
+       *   <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Enter email">
+       * </div>
+       * </code>
+       *
+       * Horizontal form.
+       * <code>
+       * <div class="form-group">
+       *   <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+       *   <div class="col-sm-10">
+       *     <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+       *   </div>
+       * </div>
+       * </code>
+       */
       'formGroup' => array(
         'attributes' => array(
           'class' => 'form-group',
-        ),
-        'factory' => array(
-          __CLASS__,
-          'formGroupFactory',
         ),
       ),
       // formと重複するため、keyではなくregexpでマッチさせる
@@ -89,7 +174,7 @@ class Forms extends AbstractTagFactory {
           'Tel'      => array('type' => 'tel'),
           'Url'      => array('type' => 'url'),
           'Password' => array('type' => 'password'),
-          'Required' => array('required' => false),
+          'Required' => array('required' => true),
         ),
       ),
       // color hasn't placeholder
@@ -102,7 +187,7 @@ class Forms extends AbstractTagFactory {
           'value' => '@2',
         ),
         'options' => array(
-          'Required' => array('required' => false),
+          'Required' => array('required' => true),
         ),
       ),
       'form' => array(
@@ -119,58 +204,16 @@ class Forms extends AbstractTagFactory {
     );
   }
 
-  /**
-   * @param array $config
-   * @param array $args (0 => name, 1 => value, 2 => placeholder, 3 => options)
-   * @return \Primalbase\Tag\Tag
-   */
-  public static function textareaFactory(array $config, array $args)
+  public static function checkboxFactory(array $config, array $args)
   {
     $tagName    = $config['tagName'];
     $attributes = $config['attributes'];
-
-    if (isset($args[0]))
-      $attributes['name'] = $args[0];
-    if (isset($args[1]))
-      $value = $args[1];
-    if (isset($args[2]))
-      $attributes['placeholder'] = $args[2];
 
     $tag = static::create($tagName, $attributes);
-
-    $tag->append($value);
-
-    foreach (array_slice($args, 3) as $arg)
-      $tag->append($arg);
-
-    return $tag;
-  }
-
-  /**
-   * @param array $config
-   * @param array $args (0 => label, 1 => form_element, 2 => sr_only, 3 => options)
-   * @return \Primalbase\Tag\Tag
-   */
-  public static function formGroupFactory(array $config, array $args)
-  {
-    $tagName    = $config['tagName'];
-    $attributes = $config['attributes'];
-
-    if (isset($args[1]))
-    {
-      $tag = static::create($tagName, $attributes);
-      $label = Tag::create('label', $args[0]);
-      $label->for($args[1]->getAttribute('id')?:false);
-      if ($args[2])
-        $label->addClass('sr-only');
-      $tag->append($label);
-      $tag->append($args[1]);
-    }
-    else
-      $tag = static::create($tagName, $attributes);
-
-    foreach (array_slice($args, 3) as $arg)
-      $tag->append($arg);
+    $tag->activeElement = static::label();
+    $tag->append($tag->activeElement);
+    foreach ($args as $arg)
+      $tag->activeElement->append($arg);
 
     return $tag;
   }
