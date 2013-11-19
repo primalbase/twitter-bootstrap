@@ -95,6 +95,24 @@ abstract class AbstractTagFactory extends Tag {
     $is_factory  = !!$config['factory'];
     $is_callback = !!$config['callback'];
 
+    $args_count       = count($args);
+    $used_arg_indexes = array();
+
+    foreach ($config['attributes'] as $key => $value)
+    {
+      if (preg_match('/^@(\d+)$/', $value, $m))
+      {
+        $index         = $m[1] - 1;
+        // default value is null.
+        if ($index >= $args_count)
+          $config['attributes'][$key] = null;
+        else
+          $config['attributes'][$key] = $args[$index];
+
+        array_push($used_arg_indexes, $index);
+      }
+    }
+
     if ($is_factory)
     {
       $factory = $config['factory'];
@@ -106,24 +124,6 @@ abstract class AbstractTagFactory extends Tag {
     }
     else
     {
-      $args_count       = count($args);
-      $used_arg_indexes = array();
-
-      foreach ($config['attributes'] as $key => $value)
-      {
-        if (preg_match('/^@(\d+)$/', $value, $m))
-        {
-          $index         = $m[1] - 1;
-          // default value is null.
-          if ($index >= $args_count)
-            $config['attributes'][$key] = null;
-          else
-            $config['attributes'][$key] = $args[$index];
-
-          array_push($used_arg_indexes, $index);
-        }
-      }
-
       $tag = static::create($config['tagName'], $config['attributes']);
       foreach ($args as $index => $arg)
       {

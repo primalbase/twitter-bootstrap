@@ -240,7 +240,9 @@ class TwitterBootstrapTest extends \PHPUnit_Framework_TestCase
 
     // form text
     $this->assertEquals('<input type="text" class="form-control">', (string)Tag::formText());
-    $this->assertEquals('<input type="text" class="form-control" name value placeholder>', (string)Tag::formText(true, true, true));
+    $this->assertEquals(
+      '<input type="text" class="form-control" name value placeholder>',
+      (string)Tag::formText(true, true, true));
     $this->assertEquals(
       '<input type="text" class="form-control" name="record[name]" placeholder="text here" id="record_name">',
       (string)Tag::formText('record[name]', null, 'text here', array('id' => 'record_name'))
@@ -249,42 +251,82 @@ class TwitterBootstrapTest extends \PHPUnit_Framework_TestCase
       '<input type="text" class="form-control" name="record[name]" placeholder="text here" id="record_name" required>',
       (string)Tag::formTextRequired('record[name]', null, 'text here', array('id' => 'record_name'))
     );
+    $this->assertEquals(
+      '<input type="text" class="form-control" name="record[name]" placeholder="text here" disabled>',
+      (string)Tag::formTextDisabled('record[name]', null, 'text here')
+    );
+
     // form hidden
     $this->assertEquals('<input type="hidden">', (string)Tag::formHidden());
     $this->assertEquals(
       '<input type="hidden" name="record[csrf]" value="hogefuga">',
       (string)Tag::formHidden('record[csrf]', 'hogefuga')
     );
+    $this->assertEquals(
+      '<input type="hidden" name="record[csrf]" value="hogefuga" disabled>',
+      (string)Tag::formHiddenDisabled('record[csrf]', 'hogefuga')
+    );
+
     // form search
     $this->assertEquals('<input type="search" class="form-control">', (string)Tag::formSearch());
-    $this->assertEquals('<input type="search" class="form-control" name="record[search]" placeholder="search now">',
-      (string)Tag::formSearch('record[search]', null, 'search now'));
-    $this->assertEquals('<input type="search" class="form-control" name="record[search]" placeholder="search now" required>',
-      (string)Tag::formSearchRequired('record[search]', null, 'search now'));
+    $this->assertEquals(
+      '<input type="search" class="form-control" name="record[search]" placeholder="search now">',
+      (string)Tag::formSearch('record[search]', null, 'search now')
+    );
+    $this->assertEquals(
+      '<input type="search" class="form-control" name="record[search]" placeholder="search now" required>',
+      (string)Tag::formSearchRequired('record[search]', null, 'search now')
+    );
+    $this->assertEquals(
+      '<input type="search" class="form-control" name="record[search]" placeholder="search now" disabled>',
+      (string)Tag::formSearchDisabled('record[search]', null, 'search now')
+    );
+
     // form tel
     $this->assertEquals('<input type="tel" class="form-control">', (string)Tag::formTel());
     $this->assertEquals(
       '<input type="tel" class="form-control" name="record[tel]" placeholder="xxx-xxxx-xxxx">',
       (string)Tag::formTel('record[tel]', null, 'xxx-xxxx-xxxx')
     );
-    $this->assertEquals('<input type="tel" class="form-control" name="record[tel]" placeholder="xxx-xxxx-xxxx" required>',
-      (string)Tag::formTelRequired('record[tel]', null, 'xxx-xxxx-xxxx'));
+    $this->assertEquals(
+      '<input type="tel" class="form-control" name="record[tel]" placeholder="xxx-xxxx-xxxx" required>',
+      (string)Tag::formTelRequired('record[tel]', null, 'xxx-xxxx-xxxx')
+    );
+    $this->assertEquals(
+      '<input type="tel" class="form-control" name="record[tel]" placeholder="xxx-xxxx-xxxx" disabled>',
+      (string)Tag::formTelDisabled('record[tel]', null, 'xxx-xxxx-xxxx')
+    );
+
     // form url
     $this->assertEquals('<input type="url" class="form-control">', (string)Tag::formUrl());
     $this->assertEquals(
       '<input type="url" class="form-control" name="record[url]" placeholder="http://www.hoge.jp">',
       (string)Tag::formUrl('record[url]', null, 'http://www.hoge.jp')
     );
-    $this->assertEquals('<input type="url" class="form-control" required>', (string)Tag::formUrlRequired());
+    $this->assertEquals(
+      '<input type="url" class="form-control" required>',
+      (string)Tag::formUrlRequired()
+    );
+    $this->assertEquals(
+      '<input type="url" class="form-control" disabled>',
+      (string)Tag::formUrlDisabled()
+    );
+
     // form email
     $this->assertEquals('<input type="email" class="form-control">', (string)Tag::formEmail());
     $this->assertEquals(
       '<input type="email" class="form-control" name="record[email]" value="hoge@fuga.jp" placeholder="mail address here" id="record_email">',
-      (string)Tag::formEmail('record[email]', 'hoge@fuga.jp', 'mail address here')->id('record_email'));
+      (string)Tag::formEmail('record[email]', 'hoge@fuga.jp', 'mail address here')->id('record_email')
+    );
     $this->assertEquals(
       '<input type="email" class="form-control" required>',
       (string)Tag::formEmailRequired()
     );
+    $this->assertEquals(
+      '<input type="email" class="form-control" disabled>',
+      (string)Tag::formEmailDisabled()
+    );
+
     // form password
     $this->assertEquals('<input type="password" class="form-control">', (string)Tag::formPassword());
     $this->assertEquals(
@@ -295,6 +337,11 @@ class TwitterBootstrapTest extends \PHPUnit_Framework_TestCase
       '<input type="password" class="form-control" name="record[password]" value="password" placeholder="password here" required>',
       (string)Tag::formPasswordRequired('record[password]', 'password', 'password here')
     );
+    $this->assertEquals(
+      '<input type="password" class="form-control" name="record[password]" value="password" placeholder="password here" disabled>',
+      (string)Tag::formPasswordDisabled('record[password]', 'password', 'password here')
+    );
+
     // form datetime
     $this->assertEquals('<input type="datetime" class="form-control">', (string)Tag::formDatetime());
     $this->assertEquals(
@@ -305,6 +352,11 @@ class TwitterBootstrapTest extends \PHPUnit_Framework_TestCase
       '<input type="datetime" class="form-control" name="record[datetime]" value="2013-11-07T22:55:00" min="1980-01-01T00:00:00" max="2045-12-31T23:59:59" step="300" required>',
       (string)Tag::formDatetimeRequired('record[datetime]', '2013-11-07T22:55:00', '1980-01-01T00:00:00', '2045-12-31T23:59:59', 300)
     );
+    $this->assertEquals(
+      '<input type="datetime" class="form-control" name="record[datetime]" value="2013-11-07T22:55:00" min="1980-01-01T00:00:00" max="2045-12-31T23:59:59" step="300" disabled>',
+      (string)Tag::formDatetimeDisabled('record[datetime]', '2013-11-07T22:55:00', '1980-01-01T00:00:00', '2045-12-31T23:59:59', 300)
+    );
+
     // form datetime-local
     $this->assertEquals('<input type="datetime-local" class="form-control">', (string)Tag::formDatetimeLocal());
     $this->assertEquals(
@@ -315,6 +367,11 @@ class TwitterBootstrapTest extends \PHPUnit_Framework_TestCase
       '<input type="datetime-local" class="form-control" name="record[datetime-local]" value="2013-11-07T22:55:00" min="1980-01-01T00:00:00" max="2045-12-31T23:59:59" step="300" required>',
       (string)Tag::formDatetimeLocalRequired('record[datetime-local]', '2013-11-07T22:55:00', '1980-01-01T00:00:00', '2045-12-31T23:59:59', 300)
     );
+    $this->assertEquals(
+      '<input type="datetime-local" class="form-control" name="record[datetime-local]" value="2013-11-07T22:55:00" min="1980-01-01T00:00:00" max="2045-12-31T23:59:59" step="300" disabled>',
+      (string)Tag::formDatetimeLocalDisabled('record[datetime-local]', '2013-11-07T22:55:00', '1980-01-01T00:00:00', '2045-12-31T23:59:59', 300)
+    );
+
     // form date
     $this->assertEquals('<input type="date" class="form-control">', (string)Tag::formDate());
     $this->assertEquals(
@@ -325,6 +382,11 @@ class TwitterBootstrapTest extends \PHPUnit_Framework_TestCase
       '<input type="date" class="form-control" name="record[date]" value="2013-11-07" min="1980-01-01" max="2045-12-31" step="1" required>',
       (string)Tag::formDateRequired('record[date]', '2013-11-07', '1980-01-01', '2045-12-31', 1)
     );
+    $this->assertEquals(
+      '<input type="date" class="form-control" name="record[date]" value="2013-11-07" min="1980-01-01" max="2045-12-31" step="1" disabled>',
+      (string)Tag::formDateDisabled('record[date]', '2013-11-07', '1980-01-01', '2045-12-31', 1)
+    );
+
     // form month
     $this->assertEquals('<input type="month" class="form-control">', (string)Tag::formMonth());
     $this->assertEquals(
@@ -335,6 +397,11 @@ class TwitterBootstrapTest extends \PHPUnit_Framework_TestCase
       '<input type="month" class="form-control" name="record[month]" value="2013-11" min="1980-01" max="2045-12" step="1" required>',
       (string)Tag::formMonthRequired('record[month]', '2013-11', '1980-01', '2045-12', 1)
     );
+    $this->assertEquals(
+      '<input type="month" class="form-control" name="record[month]" value="2013-11" min="1980-01" max="2045-12" step="1" disabled>',
+      (string)Tag::formMonthDisabled('record[month]', '2013-11', '1980-01', '2045-12', 1)
+    );
+
     // form week
     $this->assertEquals('<input type="week" class="form-control">', (string)Tag::formWeek());
     $this->assertEquals(
@@ -345,6 +412,11 @@ class TwitterBootstrapTest extends \PHPUnit_Framework_TestCase
       '<input type="week" class="form-control" name="record[week]" value="2013W11" min="1980W01" max="2045W12" step="1" required>',
       (string)Tag::formWeekRequired('record[week]', '2013W11', '1980W01', '2045W12', 1)
     );
+    $this->assertEquals(
+      '<input type="week" class="form-control" name="record[week]" value="2013W11" min="1980W01" max="2045W12" step="1" disabled>',
+      (string)Tag::formWeekDisabled('record[week]', '2013W11', '1980W01', '2045W12', 1)
+    );
+
     // form time
     $this->assertEquals('<input type="time" class="form-control">', (string)Tag::formTime());
     $this->assertEquals(
@@ -354,6 +426,10 @@ class TwitterBootstrapTest extends \PHPUnit_Framework_TestCase
     $this->assertEquals(
       '<input type="time" class="form-control" name="record[time]" value="12:00:00" min="00:00:00" max="23:59:59" step="1" required>',
       (string)Tag::formTimeRequired('record[time]', '12:00:00', '00:00:00', '23:59:59', 1)
+    );
+    $this->assertEquals(
+      '<input type="time" class="form-control" name="record[time]" value="12:00:00" min="00:00:00" max="23:59:59" step="1" disabled>',
+      (string)Tag::formTimeDisabled('record[time]', '12:00:00', '00:00:00', '23:59:59', 1)
     );
 
     // form number
@@ -366,6 +442,10 @@ class TwitterBootstrapTest extends \PHPUnit_Framework_TestCase
       '<input type="number" class="form-control" name="record[number]" value="50" min="0" max="100" step="any" required>',
       (string)Tag::formNumberRequired('record[number]', '50', '0', '100', 'any')
     );
+    $this->assertEquals(
+      '<input type="number" class="form-control" name="record[number]" value="50" min="0" max="100" step="any" disabled>',
+      (string)Tag::formNumberDisabled('record[number]', '50', '0', '100', 'any')
+    );
 
     // form range
     $this->assertEquals('<input type="range">', (string)Tag::formRange());
@@ -377,6 +457,10 @@ class TwitterBootstrapTest extends \PHPUnit_Framework_TestCase
       '<input type="range" name="record[range]" value="50" min="0" max="100" step="any" required>',
       (string)Tag::formRangeRequired('record[range]', '50', '0', '100', 'any')
     );
+    $this->assertEquals(
+      '<input type="range" name="record[range]" value="50" min="0" max="100" step="any" disabled>',
+      (string)Tag::formRangeDisabled('record[range]', '50', '0', '100', 'any')
+    );
 
     // form color
     $this->assertEquals('<input type="color" class="form-control">', (string)Tag::formColor());
@@ -387,6 +471,10 @@ class TwitterBootstrapTest extends \PHPUnit_Framework_TestCase
     $this->assertEquals(
       '<input type="color" class="form-control" name="record[color]" value="#000000" required>',
       (string)Tag::formColorRequired('record[color]', '#000000')
+    );
+    $this->assertEquals(
+      '<input type="color" class="form-control" name="record[color]" value="#000000" disabled>',
+      (string)Tag::formColorDisabled('record[color]', '#000000')
     );
 
     // textarea
@@ -403,6 +491,27 @@ class TwitterBootstrapTest extends \PHPUnit_Framework_TestCase
         'body contents'.
       '</textarea>',
       (string)Tag::formTextareaRequired('record[body]', 9, 'body contents', 'body contents here')
+    );
+    $this->assertEquals(
+      '<textarea class="form-control" name="record[body]" rows="9" placeholder="body contents here" disabled>'.
+      'body contents'.
+      '</textarea>',
+      (string)Tag::formTextareaDisabled('record[body]', 9, 'body contents', 'body contents here')
+    );
+
+    // form file
+    $this->assertEquals('<input type="file">', (string)Tag::formFile());
+    $this->assertEquals(
+      '<input type="file" name="file1" accept="image/*">',
+      (string)Tag::formFile('file1', 'image/*')
+    );
+    $this->assertEquals(
+      '<input type="file" name="file2" multiple required>',
+      (string)Tag::formFileMultipleRequired('file2')
+    );
+    $this->assertEquals(
+      '<input type="file" name="file2" multiple disabled>',
+      (string)Tag::formFileMultipleDisabled('file2')
     );
 
     // checkboxes and radios
@@ -433,7 +542,141 @@ class TwitterBootstrapTest extends \PHPUnit_Framework_TestCase
       )
     );
 
-    // @todo checkboxes and radios and others.
+    // inline checkboxes
+    $this->assertEquals(
+      '<label class="radio-inline">'.
+        '<input type="radio" name="optionsRadios" value="option1" id="inlineRadio1"> 1'.
+      '</label>',
+      (string)Tag::radioInline(
+        Tag::formRadio('optionsRadios', 'option1')->id('inlineRadio1'),
+        ' 1'
+      )
+    );
+    $this->assertEquals(
+      '<label class="checkbox-inline">'.
+      '<input type="checkbox" value="option1" id="inlineCheckbox1"> 1'.
+      '</label>',
+      (string)Tag::checkboxInline(
+        Tag::formCheckbox(null, 'option1')->id('inlineCheckbox1'),
+        ' 1'
+      )
+    );
+
+    // radio and checkbox options
+    $this->assertEquals('<input type="checkbox" required>', (string)Tag::formCheckboxRequired());
+    $this->assertEquals('<input type="radio" required>', (string)Tag::formRadioRequired());
+    $this->assertEquals('<input type="checkbox" disabled>', (string)Tag::formCheckboxDisabled());
+    $this->assertEquals('<input type="radio" disabled>', (string)Tag::formRadioDisabled());
+
+    // Selects
+    $this->assertEquals(
+      '<select class="form-control">'.
+        '<option></option>'.
+        '<option value="1" selected>value 1</option>'.
+        '<option>2</option>'.
+        '<option>3</option>'.
+        '<option>4</option>'.
+        '<option>5</option>'.
+        '<option value="b">a</option>'.
+      '</select>',
+      (string)Tag::formSelect(array(
+        null,
+        array('value 1', array('value' => '1', 'selected' => true)),
+        Tag::option('2'),
+        '3',
+        '4',
+        '5',
+        'a' => 'b',
+      ))
+    );
+    $this->assertEquals(
+      '<optgroup label="hoge"></optgroup>',
+      (string)Tag::optgroup('hoge')
+    );
+    $this->assertEquals(
+      '<select class="form-control">'.
+        '<option></option>'.
+        '<optgroup label="hoge">'.
+          '<option value="1" selected>value 1</option>'.
+          '<option>2</option>'.
+          '<option>3</option>'.
+        '</optgroup>'.
+        '<optgroup label="fuga">'.
+          '<option>4</option>'.
+          '<option>5</option>'.
+          '<option value="b">a</option>'.
+        '</optgroup>'.
+      '</select>',
+      (string)Tag::formSelect(array(
+        null,
+        Tag::optgroup('hoge', array(
+          array('value 1', array('value' => '1', 'selected' => true)),
+          Tag::option('2'),
+          '3'
+        )),
+        Tag::optgroup('fuga', array(
+          '4',
+          '5',
+          'a' => 'b',
+        ))
+      ))
+    );
+    $this->assertEquals(
+      '<select class="form-control" multiple required>'.
+        '<option value="value1" selected>label1</option>'.
+        '<option value="value2">label2</option>'.
+      '</select>',
+      (string)Tag::formSelectMultipleRequired(array(
+        Tag::optionSelected('label1', 'value1'),
+        Tag::option('label2', 'value2')->selected(false),
+      ))
+    );
+    $this->assertEquals(
+      '<select class="form-control" disabled></select>',
+      (string)Tag::formSelectDisabled()
+    );
+
+    // static control
+    $this->assertEquals(
+      '<p class="form-control-static">email@example.com</p>',
+      (string)Tag::formStatic('email@example.com')
+    );
+
+    // Control states
+    $this->assertEquals('<fieldset></fieldset>', (string)Tag::fieldset());
+    $this->assertEquals('<fieldset disabled></fieldset>', (string)Tag::fieldsetDisabled());
+
+    // Validation states
+    $this->assertEquals(
+      '<div class="form-group has-success">'.
+        '<label class="control-label" for="inputSuccess">Input with success</label>'.
+        '<input type="text" class="form-control" id="inputSuccess">'.
+      '</div>',
+      (string)Tag::formGroup(
+        Tag::controlLabel('Input with success')->for('inputSuccess'),
+        Tag::formText()->id('inputSuccess')
+      )->hasSuccess()
+    );
+    $this->assertEquals(
+      '<div class="form-group has-warning">'.
+        '<label class="control-label" for="inputWarning">Input with warning</label>'.
+        '<input type="text" class="form-control" id="inputWarning">'.
+      '</div>',
+      (string)Tag::formGroup(
+        Tag::controlLabel('Input with warning')->for('inputWarning'),
+        Tag::formText()->id('inputWarning')
+      )->hasWarning()
+    );
+    $this->assertEquals(
+      '<div class="form-group has-error">'.
+        '<label class="control-label" for="inputError">Input with error</label>'.
+        '<input type="text" class="form-control" id="inputError">'.
+      '</div>',
+      (string)Tag::formGroup(
+        Tag::controlLabel('Input with error')->for('inputError'),
+        Tag::formText()->id('inputError')
+      )->hasError()
+    );
   }
 
   /**

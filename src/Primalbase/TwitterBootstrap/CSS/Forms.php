@@ -35,6 +35,9 @@ class Forms extends GridSystem {
           'name'  => '@1',
           'value' => '@2',
         ),
+        'options' => array(
+          'Disabled' => array('disabled' => true),
+        ),
       ),
       'formNumbers' => array(
         'prefix'  => 'form',
@@ -59,6 +62,7 @@ class Forms extends GridSystem {
           'Number'   => array('type' => 'number'),
           'Range'    => array('type' => 'range', 'class' => null), // not supported by twitter bootstrap.
           'Required' => array('required' => true),
+          'Disabled' => array('disabled' => true),
         ),
       ),
       'formTextarea' => array(
@@ -72,6 +76,19 @@ class Forms extends GridSystem {
         ),
         'options' => array(
           'Required' => array('required' => true),
+          'Disabled' => array('disabled' => true),
+        ),
+      ),
+      'checkboxInline' => array(
+        'tagName' => 'label',
+        'attributes' => array(
+          'class' => 'checkbox-inline',
+        ),
+      ),
+      'radioInline' => array(
+        'tagName' => 'label',
+        'attributes' => array(
+          'class' => 'radio-inline',
         ),
       ),
       /**
@@ -105,8 +122,7 @@ class Forms extends GridSystem {
           'checkboxFactory',
         ),
       ),
-
-      'formCheckBoxAndRadio' => array(
+      'formCheckboxAndRadio' => array(
         'prefix'  => 'form',
         'regexp'  => '(Checkbox|Radio)',
         'tagName' => 'input',
@@ -119,6 +135,8 @@ class Forms extends GridSystem {
         'options' => array(
           'Checkbox' => array('type' => 'checkbox'),
           'Radio'    => array('type' => 'radio'),
+          'Required' => array('required' => true),
+          'Disabled' => array('disabled' => true),
         )
       ),
 
@@ -175,6 +193,7 @@ class Forms extends GridSystem {
           'Url'      => array('type' => 'url'),
           'Password' => array('type' => 'password'),
           'Required' => array('required' => true),
+          'Disabled' => array('disabled' => true),
         ),
       ),
       // color hasn't placeholder
@@ -188,6 +207,64 @@ class Forms extends GridSystem {
         ),
         'options' => array(
           'Required' => array('required' => true),
+          'Disabled' => array('disabled' => true),
+        ),
+      ),
+      'formFile' => array(
+        'tagName' => 'input',
+        'attributes' => array(
+          'type'   => 'file',
+          'name'   => '@1',
+          'accept' => '@2',
+        ),
+        'options' => array(
+          'Multiple' => array('multiple' => true),
+          'Required' => array('required' => true),
+          'Disabled' => array('disabled' => true),
+        ),
+      ),
+      'formStatic' => array(
+        'tagName' => 'p',
+        'attributes' => array(
+          'class' => 'form-control-static',
+        ),
+      ),
+      'formSelect' => array(
+        'tagName' => 'select',
+        'attributes'=> array(
+          'class' => 'form-control',
+        ),
+        'options' => array(
+          'Multiple' => array('multiple' => true),
+          'Required' => array('required' => true),
+          'Disabled' => array('disabled' => true),
+        ),
+        'factory' => array(__CLASS__, 'formSelectFactory'),
+      ),
+      'optgroup' => array(
+        'tagName' => 'optgroup',
+        'attributes' => array(
+          'label' => '@1',
+        ),
+        'options' => array(
+          'Disabled' => array('disabled' => true)
+        ),
+        'factory' => array(__CLASS__, 'optgroupFactory'),
+      ),
+      'option' => array(
+        'tagName' => 'option',
+        'attributes' => array(
+          // append to @1
+          'value' => '@2',
+        ),
+        'options' => array(
+          'Selected' => array('selected' => true),
+        )
+      ),
+      'fieldset' => array(
+        'tagName' => 'fieldset',
+        'options' => array(
+          'Disabled' => array('disabled' => true)
         ),
       ),
       'form' => array(
@@ -217,4 +294,94 @@ class Forms extends GridSystem {
 
     return $tag;
   }
+
+  public static function formSelectFactory(array $config, array $args)
+  {
+    $tagName    = $config['tagName'];
+    $attributes = $config['attributes'];
+
+    $tag = static::create($tagName, $attributes);
+    if (isset($args[0]))
+    {
+      foreach ($args[0] as $name => $value)
+      {
+        if ($value instanceof \Primalbase\Tag\Tag)
+          $option = $value;
+        elseif (is_array($value))
+        {
+          $option = static::option();
+          foreach ($value as $v)
+            $option->append($v);
+        }
+        elseif (preg_match('/^[0-9]+$/', $name))
+          $option = static::option($value);
+        else
+          $option = static::option($name)->value($value);
+
+        $tag->append($option);
+      }
+    }
+    foreach (array_splice($args, 1) as $arg)
+      $tag->append($arg);
+
+    return $tag;
+  }
+
+  public static function optgroupFactory(array $config, array $args)
+  {
+    $tagName    = $config['tagName'];
+    $attributes = $config['attributes'];
+
+    $tag = static::create($tagName, $attributes);
+    if (isset($args[1]))
+    {
+      foreach ($args[1] as $name => $value)
+      {
+        if ($value instanceof \Primalbase\Tag\Tag)
+          $option = $value;
+        elseif (is_array($value))
+        {
+          $option = static::option();
+          foreach ($value as $v)
+            $option->append($v);
+        }
+        elseif (preg_match('/^[0-9]+$/', $name))
+          $option = static::option($value);
+        else
+          $option = static::option($name)->value($value);
+
+        $tag->append($option);
+      }
+    }
+    foreach (array_splice($args, 2) as $arg)
+      $tag->append($arg);
+
+    return $tag;
+  }
+
+  public function hasWarning()
+  {
+    return $this->addClass('has-warning');
+  }
+
+  public function hasError()
+  {
+    return $this->addClass('has-error');
+  }
+
+  public function hasSuccess()
+  {
+    return $this->addClass('has-success');
+  }
+
+  public function inputLg()
+  {
+    return $this->addClass('input-lg');
+  }
+
+  public function inputSm()
+  {
+    return $this->addClass('input-sm');
+  }
+
 }
