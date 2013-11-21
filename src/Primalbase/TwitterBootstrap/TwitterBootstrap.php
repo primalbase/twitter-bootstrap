@@ -81,7 +81,7 @@ use Primalbase\Tag\Tag;
  *
  * @method static \Primalbase\TwitterBootstrap\CSS\Forms formHorizontal(\mixed $options = null)
  *
- * Css/Form/Horizontal form
+ * CSS/Form/Horizontal form
  *
  * @method static \Primalbase\TwitterBootstrap\CSS\Forms controlLabel(\mixed $options = null)
  *
@@ -143,7 +143,7 @@ use Primalbase\Tag\Tag;
  * @method static \Primalbase\TwitterBootstrap\CSS\Forms formFileMultiple(\string $name = null, \string $accept = null, array $options = null)
  * @method static \Primalbase\TwitterBootstrap\CSS\Forms formFileDisabled(\string $name = null, \string $accept = null, array $options = null)
  *
- * Css/Forms/Supported controls/Checkboxes and radios
+ * CSS/Forms/Supported controls/Checkboxes and radios
  *
  * @method static \Primalbase\TwitterBootstrap\CSS\Forms formCheckbox(\string $name = null, \string $value = null, \boolean $checked = false, array $options = null)
  * @method static \Primalbase\TwitterBootstrap\CSS\Forms formCheckboxRequired(\string $name = null, \string $value = null, \boolean $checked = false, array $options = null)
@@ -156,7 +156,8 @@ use Primalbase\Tag\Tag;
  * @method static \Primalbase\TwitterBootstrap\CSS\Forms radio(\mixed $options = null)
  * @method static \Primalbase\TwitterBootstrap\CSS\Forms radioInline(\mixed $options = null)
  *
- * Css/Forms/Supported controls/Selects
+ * CSS/Forms/Supported controls/Selects
+ *
  * @method static \Primalbase\TwitterBootstrap\CSS\Forms formSelect(array $collections = null, \mixed $options = null)
  * @method static \Primalbase\TwitterBootstrap\CSS\Forms formSelectMultiple(array $collections = null, \mixed $options = null)
  * @method static \Primalbase\TwitterBootstrap\CSS\Forms formSelectRequired(array $collections = null, \mixed $options = null)
@@ -166,12 +167,18 @@ use Primalbase\Tag\Tag;
  * @method static \Primalbase\TwitterBootstrap\CSS\Forms optgroup(\string $label, array $collections = null, \mixed $options = null)
  * @method static \Primalbase\TwitterBootstrap\CSS\Forms optgroupDisabled(\string $label, array $collections = null, \mixed $options = null)
  *
- * Css/Forms/Static control
+ * CSS/Forms/Static control
+ *
  * @method static \Primalbase\TwitterBootstrap\CSS\Forms formStatic(\mixed $options = null)
  *
- * Css/Forms/Control states
+ * CSS/Forms/Control states
+ *
  * @method static \Primalbase\TwitterBootstrap\CSS\Forms fieldset(\mixed $options = null)
  * @method static \Primalbase\TwitterBootstrap\CSS\Forms fieldsetDisabled(\mixed $options = null)
+ *
+ * CSS/Forms/Help text
+ *
+ * @method static \Primalbase\TwitterBootstrap\CSS\Forms helpBlock(\mixed $options = null)
  *
  * CSS/Buttons
  *

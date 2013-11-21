@@ -266,6 +266,7 @@ class Forms extends GridSystem {
         'options' => array(
           'Disabled' => array('disabled' => true)
         ),
+
       ),
       'form' => array(
         'tagName' => 'form',
@@ -276,6 +277,12 @@ class Forms extends GridSystem {
         'options' => array(
           'Inline'     => 'form-inline',
           'Horizontal' => 'form-horizontal',
+        ),
+      ),
+      'helpBlock' => array(
+        'tagName' => 'span',
+        'attributes' => array(
+          'class' => 'help-block',
         ),
       ),
     );

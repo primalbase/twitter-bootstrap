@@ -677,6 +677,27 @@ class TwitterBootstrapTest extends \PHPUnit_Framework_TestCase
         Tag::formText()->id('inputError')
       )->hasError()
     );
+
+    // Control Sizing
+    $this->assertEquals(
+      '<input type="text" class="form-control input-lg" placeholder=".input-lg">',
+      (string)Tag::formText(null, null, '.input-lg')->inputLg()
+    );
+    $this->assertEquals(
+      '<input type="text" class="form-control input-sm" placeholder=".input-sm">',
+      (string)Tag::formText(null, null, '.input-sm')->inputSm()
+    );
+    $this->assertEquals(
+      '<select class="form-control input-lg">...</select>',
+      (string)Tag::formSelect(null, '...')->inputLg()
+    );
+
+    // Help text
+    $this->assertEquals(
+      '<span class="help-block">A block of help text that breaks onto a new line and may extend beyond one line.</span>',
+      (string)Tag::helpBlock('A block of help text that breaks onto a new line and may extend beyond one line.')
+    );
+
   }
 
   /**
