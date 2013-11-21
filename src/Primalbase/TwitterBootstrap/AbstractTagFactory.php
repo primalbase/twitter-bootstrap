@@ -169,6 +169,8 @@ abstract class AbstractTagFactory extends Tag {
                 $this->attr($c_value);
               elseif ($c_key == 'tagName')
                 $this->tagName($c_value);
+              elseif ($c_key == 'addClass')
+                $this->addClass($c_value);
               // 値のみ
               else
                 $this->attr($c_key, $c_value);

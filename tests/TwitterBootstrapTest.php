@@ -705,7 +705,77 @@ class TwitterBootstrapTest extends \PHPUnit_Framework_TestCase
    */
   public function testCSSButtons()
   {
+    $this->assertEquals(
+      '<input type="submit" class="btn btn-default" value="Submit">',
+      (string)Tag::btnSubmit('Submit'),
+      'btnSubmit()'
+    );
+    $this->assertEquals(
+      '<input type="image" src="hoge" alt="fuga">',
+      (string)Tag::btnImage('hoge', 'fuga'),
+      'btnImage(\'hoge\', \'fuga\')'
+    );
+    $this->assertEquals(
+      '<input type="reset" class="btn btn-default" value="Reset">',
+      (string)Tag::btnReset('Reset'),
+      "btnReset('Reset')"
+    );
+    $this->assertEquals(
+      '<button type="button" class="btn btn-default"></button>',
+      (string)Tag::btn()
+    );
+    $this->assertEquals(
+      '<button type="button" class="btn btn-default">Button</button>',
+      (string)Tag::btnDefault('Button')
+    );
+    $this->assertEquals(
+      '<button type="button" class="btn btn-primary">Primary Button</button>',
+      (string)Tag::btnPrimary('Primary Button')
+    );
+    $this->assertEquals(
+      '<button type="button" class="btn btn-success">Success Button</button>',
+      (string)Tag::btnSuccess('Success Button')
+    );
+    $this->assertEquals(
+      '<button type="button" class="btn btn-info">Info Button</button>',
+      (string)Tag::btnInfo('Info Button')
+    );
+    $this->assertEquals(
+      '<button type="button" class="btn btn-warning">Warning Button</button>',
+      (string)Tag::btnWarning('Warning Button')
+    );
+    $this->assertEquals(
+      '<button type="button" class="btn btn-danger">Danger Button</button>',
+      (string)Tag::btnDanger('Danger Button')
+    );
+    $this->assertEquals(
+     '<button type="button" class="btn btn-link">Link Button</button>',
+     (string)Tag::btnLink('Link Button')
+    );
 
+    // Sizes
+    $this->assertEquals(
+      '<button type="button" class="btn btn-primary btn-lg">Large button</button>',
+      (string)Tag::btnPrimaryLg('Large button'),
+      'btnPrimaryLg()'
+    );
+    $this->assertEquals(
+      '<button type="button" class="btn btn-default btn-lg">Large button</button>',
+      (string)Tag::btnDefaultLg('Large button'),
+      'btnLg()'
+    );
+
+    $this->assertEquals(
+      '<button type="button" class="btn btn-primary btn-lg btn-block">Block level button</button>',
+      (string)Tag::btnPrimaryLgBlock('Block level button'),
+      "Tag::btnPrimaryLgBlock('Block level button')"
+    );
+
+    $this->assertEquals(
+      '<button type="button" class="btn btn-default btn-lg btn-block">Block level button</button>',
+      (string)Tag::btnLgBlock('Block level button'),
+      "Tag::btnLgBlock('Block level button')"
+    );
   }
 
   /**

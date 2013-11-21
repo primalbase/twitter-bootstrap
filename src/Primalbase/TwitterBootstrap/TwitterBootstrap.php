@@ -186,10 +186,24 @@ use Primalbase\Tag\Tag;
  * @todo CSS/Buttons isn't implemented yet.
  * @todo CSS/Buttons isn't tested yet.
  *
- * @method static \Primalbase\TwitterBootstrap\CSS\Forms formSubmit(\string $value = null, array $options = null)
- * @method static \Primalbase\TwitterBootstrap\CSS\Forms formSubmitImage(\string $src = null, \string $alt = null, array $options = null)
- * @method static \Primalbase\TwitterBootstrap\CSS\Forms formReset(\string $value = null, array $options = null)
- * @method static \Primalbase\TwitterBootstrap\CSS\Forms formButton(\string $value = null, array $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Buttons btnSubmit(\string $value = null, array $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Buttons btnImage(\string $src, \string $alt, array $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Buttons btnReset(\string $value = null, array $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Buttons btnDefault(\string $value = null, array $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Buttons btnPrimary(\string $value = null, array $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Buttons btnSuccess(\string $value = null, array $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Buttons btnInfo(\string $value = null, array $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Buttons btnWarning(\string $value = null, array $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Buttons btnDanger(\string $value = null, array $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Buttons btnLink(\string $value = null, array $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Buttons btnLg(\string $value = null, array $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Buttons btnSm(\string $value = null, array $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Buttons btnXs(\string $value = null, array $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Buttons btnBlock(\string $value = null, array $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Buttons btnActive(\string $value = null, array $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Buttons btnAnchor(\string $href, array $options = null)
+ * @method static \Primalbase\TwitterBootstrap\CSS\Buttons btnDisabled(\string $value = null, array $options = null)
+ *
  *
  * CSS/Images
  *
@@ -231,6 +245,7 @@ class TwitterBootstrap extends Tag
     'Primalbase\TwitterBootstrap\CSS\Table\Row', // Duplicate method name. Should be insert before Table.
     'Primalbase\TwitterBootstrap\CSS\Table',
     'Primalbase\TwitterBootstrap\CSS\Forms',
+    'Primalbase\TwitterBootstrap\CSS\Buttons',
     'Primalbase\TwitterBootstrap\Components\Navbar',
     'Primalbase\TwitterBootstrap\Components\Panels',
     'Primalbase\TwitterBootstrap\Components\Navs',
