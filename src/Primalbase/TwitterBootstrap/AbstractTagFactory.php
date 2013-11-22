@@ -80,6 +80,7 @@ abstract class AbstractTagFactory extends Tag {
     $config = array_merge(array(
       'class'        => get_called_class(),
       'prefix'       => '',
+      'regexp'       => null,
       'options'      => array(),
       'attributes'   => array(),
       'tagName'      => 'div',
