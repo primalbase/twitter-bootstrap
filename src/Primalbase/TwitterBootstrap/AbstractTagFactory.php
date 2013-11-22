@@ -38,6 +38,14 @@ abstract class AbstractTagFactory extends Tag {
 
   protected $activeElement = null;
 
+  public function getActiveElement()
+  {
+    if ($this->activeElement)
+      return $this->activeElement;
+
+    return $this;
+  }
+
   public static function getFormatConfigurations()
   {
     $formatConfigurations = array();
