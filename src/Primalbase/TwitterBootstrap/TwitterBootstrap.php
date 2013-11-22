@@ -284,7 +284,7 @@ class TwitterBootstrap extends Tag
         return $config['class']::build($tagName, $config, $args);
     }
 
-    return call_user_func_array(array(parent, $tagName), $args);
+    return parent::createInstanceArray($tagName, $args);
   }
 
   /**
@@ -318,7 +318,7 @@ class TwitterBootstrap extends Tag
       'textDanger'  => 'text-danger',
     );
 
-    if ($pattern[$name])
+    if (array_key_exists($name, $pattern))
       return $this->addClass($pattern[$name]);
 
     return parent::__call($name, $args);

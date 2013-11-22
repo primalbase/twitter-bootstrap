@@ -125,7 +125,7 @@ class GridSystem extends AbstractTagFactory {
       'lgOffset' => 'col-lg-offset-',
     );
 
-    if ($pattern[$name])
+    if (array_key_exists($name, $pattern))
       return $this->addClass($pattern[$name].$args[0]);
 
     return parent::__call($name, $args);

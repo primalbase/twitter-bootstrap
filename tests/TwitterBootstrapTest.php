@@ -57,11 +57,11 @@ class TwitterBootstrapTest extends \PHPUnit_Framework_TestCase
 
   public function testCSS()
   {
+    $this->assertEquals('<meta name="viewport" content="width=device-width, initial-scale=1.0">',
+      (string)Tag::viewport());
     $this->assertEquals('<!DOCTYPE html>', (string)Tag::getDocType());
     $this->assertEquals('<html lang="en"></html>', (string)Tag::html());
     $this->assertEquals('<html lang="ja" hoge="fuga"></html>', (string)Tag::html('ja', array('hoge' => 'fuga')));
-    $this->assertEquals('<meta name="viewport" content="width=device-width, initial-scale=1.0">',
-      (string)Tag::viewport());
     $this->assertEquals('<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=1.0, maximum-scale=1.5">',
       (string)Tag::viewport(true, '1.0', '1.5'));
     $this->assertEquals('<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">',
@@ -773,9 +773,16 @@ class TwitterBootstrapTest extends \PHPUnit_Framework_TestCase
 
     $this->assertEquals(
       '<button type="button" class="btn btn-default btn-lg btn-block">Block level button</button>',
-      (string)Tag::btnLgBlock('Block level button'),
+      (string)Tag::btnDefaultLgBlock('Block level button'),
       "Tag::btnLgBlock('Block level button')"
     );
+
+    $this->assertEquals(
+      '<button type="button" class="btn btn-primary btn-lg active">Primary button</button>',
+      (string)Tag::btnPrimaryLgActive('Primary button'),
+      "Tag::btnPrimaryLgActive('Primary button')"
+    );
+
   }
 
   /**
